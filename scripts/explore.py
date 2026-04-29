@@ -1,5 +1,7 @@
 import pandas as pd
-df = pd.read_csv("steam_store_games.csv")
+import os
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+df = pd.read_csv(os.path.join(DATA_DIR, "steam_store_games.csv"))
 print(f"Shape: {df.shape}")
 print(f"Columns: {list(df.columns)}")
 print()

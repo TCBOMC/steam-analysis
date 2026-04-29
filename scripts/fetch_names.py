@@ -21,8 +21,11 @@ REQUEST_DELAY = 1.0  # 逐个请求之间的间隔
 
 sys.stdout.reconfigure(encoding="utf-8")
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+
 # 从 timeline_data.json 收集所有需要翻译的 appid
-with open("timeline_data.json", "r", encoding="utf-8") as f:
+with open(os.path.join(DATA_DIR, "timeline_data.json"), "r", encoding="utf-8") as f:
     data = json.load(f)
 
 appids = set()
@@ -119,8 +122,8 @@ print(f"  日文名: {has_jp}/{total}")
 if missing:
     print(f"  完全缺失: {missing[:20]}{'...' if len(missing) > 20 else ''}")
 
-with open("game_names.json", "w", encoding="utf-8") as f:
+with open(os.path.join(DATA_DIR, "game_names.json"), "w", encoding="utf-8") as f:
     json.dump(names, f, ensure_ascii=False, indent=2)
 
 sz = len(json.dumps(names, ensure_ascii=False))
-print(f"game_names.json ({sz // 1024} KB)")
+print(f"data/game_names.json ({sz // 1024} KB)")
