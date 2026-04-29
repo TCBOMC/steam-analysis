@@ -23,9 +23,10 @@ Steam 平台游戏数据的交互式可视化分析，覆盖 **2006–2025 年**
 ```
 steam-analysis/
 ├── index_standalone.html       # 单机版（所有数据内嵌，直接打开即用）
+├── rebuild.bat                 # 一键重建数据（分析 → 翻译 → 嵌入 → 打开）
 ├── README.md
 ├── scripts/                    # 构建脚本
-│   ├── analysis_v2.py          # 数据分析（生成 timeline_data.json）
+│   ├── analysis_v2.py          # 数据分析（kagglehub 自动下载数据集，生成 timeline_data.json）
 │   ├── build_game_names_final.py  # 游戏名翻译构建（285条手动映射 + 外部数据）
 │   ├── embed_v2.py             # 数据注入（JSON → 单机 HTML）
 │   ├── explore.py              # 数据探索
@@ -48,18 +49,21 @@ steam-analysis/
 
 ## 如何重新生成数据
 
-```bash
-# 1. 下载数据集（需先 pip install kagglehub）
-python -c "import kagglehub; kagglehub.dataset_download('fronkongames/steam-games-dataset')"
-# 将下载的 games.json 转为 CSV 放入 data/steam_store_games.csv（或修改 analysis_v2.py 中的路径）
+**方式一：双击 `rebuild.bat`**（Windows 推荐，自动完成后打开预览）
 
-# 2. 运行分析
+**方式二：手动执行**
+
+```bash
+# 前置依赖
+pip install kagglehub pandas numpy scipy scikit-learn
+
+# 1. 运行分析（自动通过 kagglehub 下载数据集，无需手动下载）
 python scripts/analysis_v2.py
 
-# 3. （可选）重新构建游戏名翻译
+# 2. （可选）重新构建游戏名翻译
 python scripts/build_game_names_final.py
 
-# 4. 生成单机 HTML
+# 3. 生成单机 HTML
 python scripts/embed_v2.py
 ```
 
