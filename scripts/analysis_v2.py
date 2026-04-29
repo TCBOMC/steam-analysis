@@ -3,6 +3,7 @@ Steam时代编年史 - 数据分析脚本 v2
 按年份切分数据，生成：偏好画像、词云数据、推荐排名、跨时间趋势
 """
 
+import os
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -70,8 +71,10 @@ class NumpyEncoder(json.JSONEncoder):
 # ============================================================
 # 数据加载与清洗（JSON 格式）
 # ============================================================
+import kagglehub
+_dataset_path = kagglehub.dataset_download("fronkongames/steam-games-dataset")
 df = pd.read_json(
-    r"C:\Users\TRSEIMC\.cache\kagglehub\datasets\fronkongames\steam-games-dataset\versions\31\games.json",
+    os.path.join(_dataset_path, "games.json"),
     orient="index"
 )
 # 重置索引，使 AppID 成为一列
@@ -460,7 +463,6 @@ output = {
     "year_range": [YEAR_MIN, YEAR_MAX],
 }
 
-import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_PATH = os.path.join(ROOT, "data", "timeline_data.json")
 
