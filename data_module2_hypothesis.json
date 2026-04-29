@@ -1,0 +1,123 @@
+{
+  "threshold_results": [
+    {
+      "threshold": 2,
+      "indie_n": 5943,
+      "major_n": 5875,
+      "indie_mean": 74.1,
+      "major_mean": 74.9,
+      "indie_std": 17.3,
+      "major_std": 17.1,
+      "t_statistic": 2.654,
+      "p_value": 0.008,
+      "cohens_d": 0.049,
+      "significant": true
+    },
+    {
+      "threshold": 3,
+      "indie_n": 7845,
+      "major_n": 3973,
+      "indie_mean": 74.4,
+      "major_mean": 74.8,
+      "indie_std": 17.1,
+      "major_std": 17.4,
+      "t_statistic": 1.326,
+      "p_value": 0.1849,
+      "cohens_d": 0.026,
+      "significant": false
+    },
+    {
+      "threshold": 5,
+      "indie_n": 9545,
+      "major_n": 2273,
+      "indie_mean": 74.4,
+      "major_mean": 74.8,
+      "indie_std": 17.2,
+      "major_std": 17.3,
+      "t_statistic": 1.035,
+      "p_value": 0.3006,
+      "cohens_d": 0.024,
+      "significant": false
+    },
+    {
+      "threshold": 7,
+      "indie_n": 10275,
+      "major_n": 1543,
+      "indie_mean": 74.3,
+      "major_mean": 76.2,
+      "indie_std": 17.2,
+      "major_std": 16.9,
+      "t_statistic": 4.278,
+      "p_value": 0.0,
+      "cohens_d": 0.115,
+      "significant": true
+    },
+    {
+      "threshold": 10,
+      "indie_n": 10942,
+      "major_n": 876,
+      "indie_mean": 74.3,
+      "major_mean": 77.0,
+      "indie_std": 17.2,
+      "major_std": 16.4,
+      "t_statistic": 4.697,
+      "p_value": 0.0,
+      "cohens_d": 0.158,
+      "significant": true
+    },
+    {
+      "threshold": 15,
+      "indie_n": 11380,
+      "major_n": 438,
+      "indie_mean": 74.4,
+      "major_mean": 77.9,
+      "indie_std": 17.2,
+      "major_std": 16.5,
+      "t_statistic": 4.404,
+      "p_value": 0.0,
+      "cohens_d": 0.207,
+      "significant": true
+    },
+    {
+      "threshold": 20,
+      "indie_n": 11598,
+      "major_n": 220,
+      "indie_mean": 74.5,
+      "major_mean": 75.9,
+      "indie_std": 17.2,
+      "major_std": 17.4,
+      "t_statistic": 1.201,
+      "p_value": 0.231,
+      "cohens_d": 0.083,
+      "significant": false
+    }
+  ],
+  "default_threshold": 5,
+  "box_data": {
+    "indie": {
+      "min": 0.256,
+      "q1": 0.645,
+      "median": 0.781,
+      "q3": 0.879,
+      "max": 0.983,
+      "mean": 0.744,
+      "std": 0.172,
+      "n": 9545
+    },
+    "major": {
+      "min": 0.269,
+      "q1": 0.653,
+      "median": 0.789,
+      "q3": 0.885,
+      "max": 0.98,
+      "mean": 0.748,
+      "std": 0.173,
+      "n": 2273
+    }
+  },
+  "hypothesis": {
+    "h0": "独立游戏与大厂游戏的好评率均值无显著差异",
+    "h1": "独立游戏与大厂游戏的好评率均值存在显著差异",
+    "method": "Welch's t-test (双样本t检验，不假设等方差)"
+  }
+}

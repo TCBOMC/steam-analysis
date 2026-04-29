@@ -1,0 +1,714 @@
+{
+  "genres": [
+    "Action",
+    "Adventure",
+    "Casual",
+    "Free to Play",
+    "Indie",
+    "RPG",
+    "Racing",
+    "Sexual Content",
+    "Simulation",
+    "Strategy",
+    "Violent"
+  ],
+  "genre_stats": {
+    "Action": {
+      "n": 5041,
+      "mean": 73.9,
+      "std": 17.3,
+      "median": 77.9
+    },
+    "Adventure": {
+      "n": 2418,
+      "mean": 77.6,
+      "std": 15.9,
+      "median": 80.8
+    },
+    "Casual": {
+      "n": 1290,
+      "mean": 75.5,
+      "std": 17.3,
+      "median": 79.4
+    },
+    "Free to Play": {
+      "n": 285,
+      "mean": 67.6,
+      "std": 15.9,
+      "median": 68.8
+    },
+    "Indie": {
+      "n": 1129,
+      "mean": 76.4,
+      "std": 16.0,
+      "median": 80.0
+    },
+    "RPG": {
+      "n": 257,
+      "mean": 75.4,
+      "std": 15.5,
+      "median": 77.7
+    },
+    "Racing": {
+      "n": 139,
+      "mean": 70.9,
+      "std": 16.4,
+      "median": 74.7
+    },
+    "Sexual Content": {
+      "n": 132,
+      "mean": 79.3,
+      "std": 14.1,
+      "median": 81.6
+    },
+    "Simulation": {
+      "n": 361,
+      "mean": 64.8,
+      "std": 20.7,
+      "median": 67.8
+    },
+    "Strategy": {
+      "n": 322,
+      "mean": 72.7,
+      "std": 18.3,
+      "median": 77.7
+    },
+    "Violent": {
+      "n": 228,
+      "mean": 69.2,
+      "std": 18.2,
+      "median": 71.6
+    }
+  },
+  "anova": {
+    "f_statistic": 31.12,
+    "p_value": 0.0,
+    "significant": true
+  },
+  "tukey_pairs": [
+    {
+      "group1": "Action",
+      "group2": "Adventure",
+      "mean_diff": 3.6,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Casual",
+      "mean_diff": 1.6,
+      "p_value": 0.1054,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Free to Play",
+      "mean_diff": -6.4,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Indie",
+      "mean_diff": 2.5,
+      "p_value": 0.0006,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "RPG",
+      "mean_diff": 1.5,
+      "p_value": 0.953,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Racing",
+      "mean_diff": -3.0,
+      "p_value": 0.6152,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Sexual Content",
+      "mean_diff": 5.4,
+      "p_value": 0.0137,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Simulation",
+      "mean_diff": -9.2,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Strategy",
+      "mean_diff": -1.2,
+      "p_value": 0.9778,
+      "reject": false
+    },
+    {
+      "group1": "Action",
+      "group2": "Violent",
+      "mean_diff": -4.7,
+      "p_value": 0.0021,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Casual",
+      "mean_diff": -2.1,
+      "p_value": 0.019,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Free to Play",
+      "mean_diff": -10.0,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Indie",
+      "mean_diff": -1.2,
+      "p_value": 0.7051,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "RPG",
+      "mean_diff": -2.1,
+      "p_value": 0.7118,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Racing",
+      "mean_diff": -6.6,
+      "p_value": 0.0004,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Sexual Content",
+      "mean_diff": 1.8,
+      "p_value": 0.9854,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Simulation",
+      "mean_diff": -12.8,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Strategy",
+      "mean_diff": -4.8,
+      "p_value": 0.0001,
+      "reject": false
+    },
+    {
+      "group1": "Adventure",
+      "group2": "Violent",
+      "mean_diff": -8.3,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Free to Play",
+      "mean_diff": -7.9,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Indie",
+      "mean_diff": 0.9,
+      "p_value": 0.9725,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "RPG",
+      "mean_diff": -0.1,
+      "p_value": 1.0,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Racing",
+      "mean_diff": -4.5,
+      "p_value": 0.0927,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Sexual Content",
+      "mean_diff": 3.8,
+      "p_value": 0.3203,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Simulation",
+      "mean_diff": -10.7,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Strategy",
+      "mean_diff": -2.8,
+      "p_value": 0.2347,
+      "reject": false
+    },
+    {
+      "group1": "Casual",
+      "group2": "Violent",
+      "mean_diff": -6.3,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "Indie",
+      "mean_diff": 8.8,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "RPG",
+      "mean_diff": 7.9,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "Racing",
+      "mean_diff": 3.4,
+      "p_value": 0.704,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "Sexual Content",
+      "mean_diff": 11.8,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "Simulation",
+      "mean_diff": -2.8,
+      "p_value": 0.5932,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "Strategy",
+      "mean_diff": 5.1,
+      "p_value": 0.0088,
+      "reject": false
+    },
+    {
+      "group1": "Free to Play",
+      "group2": "Violent",
+      "mean_diff": 1.7,
+      "p_value": 0.9912,
+      "reject": false
+    },
+    {
+      "group1": "Indie",
+      "group2": "RPG",
+      "mean_diff": -0.9,
+      "p_value": 0.9993,
+      "reject": false
+    },
+    {
+      "group1": "Indie",
+      "group2": "Racing",
+      "mean_diff": -5.4,
+      "p_value": 0.0161,
+      "reject": false
+    },
+    {
+      "group1": "Indie",
+      "group2": "Sexual Content",
+      "mean_diff": 2.9,
+      "p_value": 0.7236,
+      "reject": false
+    },
+    {
+      "group1": "Indie",
+      "group2": "Simulation",
+      "mean_diff": -11.6,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Indie",
+      "group2": "Strategy",
+      "mean_diff": -3.7,
+      "p_value": 0.0268,
+      "reject": false
+    },
+    {
+      "group1": "Indie",
+      "group2": "Violent",
+      "mean_diff": -7.1,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "RPG",
+      "group2": "Racing",
+      "mean_diff": -4.5,
+      "p_value": 0.2978,
+      "reject": false
+    },
+    {
+      "group1": "RPG",
+      "group2": "Sexual Content",
+      "mean_diff": 3.9,
+      "p_value": 0.5426,
+      "reject": false
+    },
+    {
+      "group1": "RPG",
+      "group2": "Simulation",
+      "mean_diff": -10.7,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "RPG",
+      "group2": "Strategy",
+      "mean_diff": -2.7,
+      "p_value": 0.7115,
+      "reject": false
+    },
+    {
+      "group1": "RPG",
+      "group2": "Violent",
+      "mean_diff": -6.2,
+      "p_value": 0.0029,
+      "reject": false
+    },
+    {
+      "group1": "Racing",
+      "group2": "Sexual Content",
+      "mean_diff": 8.4,
+      "p_value": 0.0024,
+      "reject": false
+    },
+    {
+      "group1": "Racing",
+      "group2": "Simulation",
+      "mean_diff": -6.2,
+      "p_value": 0.0123,
+      "reject": false
+    },
+    {
+      "group1": "Racing",
+      "group2": "Strategy",
+      "mean_diff": 1.8,
+      "p_value": 0.9946,
+      "reject": false
+    },
+    {
+      "group1": "Racing",
+      "group2": "Violent",
+      "mean_diff": -1.7,
+      "p_value": 0.9975,
+      "reject": false
+    },
+    {
+      "group1": "Sexual Content",
+      "group2": "Simulation",
+      "mean_diff": -14.5,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Sexual Content",
+      "group2": "Strategy",
+      "mean_diff": -6.6,
+      "p_value": 0.0076,
+      "reject": false
+    },
+    {
+      "group1": "Sexual Content",
+      "group2": "Violent",
+      "mean_diff": -10.1,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Simulation",
+      "group2": "Strategy",
+      "mean_diff": 7.9,
+      "p_value": 0.0,
+      "reject": false
+    },
+    {
+      "group1": "Simulation",
+      "group2": "Violent",
+      "mean_diff": 4.5,
+      "p_value": 0.0713,
+      "reject": false
+    },
+    {
+      "group1": "Strategy",
+      "group2": "Violent",
+      "mean_diff": -3.5,
+      "p_value": 0.381,
+      "reject": false
+    }
+  ],
+  "tukey_matrix": {
+    "genres": [
+      "Action",
+      "Adventure",
+      "Casual",
+      "Free to Play",
+      "Indie",
+      "RPG",
+      "Racing",
+      "Sexual Content",
+      "Simulation",
+      "Strategy",
+      "Violent"
+    ],
+    "matrix": [
+      [
+        0,
+        0.0,
+        0.1054,
+        0.0,
+        0.0006,
+        0.953,
+        0.6152,
+        0.0137,
+        0.0,
+        0.9778,
+        0.0021
+      ],
+      [
+        0.0,
+        0,
+        0.019,
+        0.0,
+        0.7051,
+        0.7118,
+        0.0004,
+        0.9854,
+        0.0,
+        0.0001,
+        0.0
+      ],
+      [
+        0.1054,
+        0.019,
+        0,
+        0.0,
+        0.9725,
+        1.0,
+        0.0927,
+        0.3203,
+        0.0,
+        0.2347,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0,
+        0.0,
+        0.0,
+        0.704,
+        0.0,
+        0.5932,
+        0.0088,
+        0.9912
+      ],
+      [
+        0.0006,
+        0.7051,
+        0.9725,
+        0.0,
+        0,
+        0.9993,
+        0.0161,
+        0.7236,
+        0.0,
+        0.0268,
+        0.0
+      ],
+      [
+        0.953,
+        0.7118,
+        1.0,
+        0.0,
+        0.9993,
+        0,
+        0.2978,
+        0.5426,
+        0.0,
+        0.7115,
+        0.0029
+      ],
+      [
+        0.6152,
+        0.0004,
+        0.0927,
+        0.704,
+        0.0161,
+        0.2978,
+        0,
+        0.0024,
+        0.0123,
+        0.9946,
+        0.9975
+      ],
+      [
+        0.0137,
+        0.9854,
+        0.3203,
+        0.0,
+        0.7236,
+        0.5426,
+        0.0024,
+        0,
+        0.0,
+        0.0076,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.5932,
+        0.0,
+        0.0,
+        0.0123,
+        0.0,
+        0,
+        0.0,
+        0.0713
+      ],
+      [
+        0.9778,
+        0.0001,
+        0.2347,
+        0.0088,
+        0.0268,
+        0.7115,
+        0.9946,
+        0.0076,
+        0.0,
+        0,
+        0.381
+      ],
+      [
+        0.0021,
+        0.0,
+        0.0,
+        0.9912,
+        0.0,
+        0.0029,
+        0.9975,
+        0.0,
+        0.0713,
+        0.381,
+        0
+      ]
+    ]
+  },
+  "genre_box_data": {
+    "Action": {
+      "min": 24.9,
+      "q1": 64.2,
+      "median": 77.9,
+      "q3": 87.4,
+      "max": 98.0
+    },
+    "Adventure": {
+      "min": 30.7,
+      "q1": 68.2,
+      "median": 80.8,
+      "q3": 90.2,
+      "max": 98.5
+    },
+    "Casual": {
+      "min": 29.2,
+      "q1": 65.1,
+      "median": 79.4,
+      "q3": 89.5,
+      "max": 98.4
+    },
+    "Free to Play": {
+      "min": 33.7,
+      "q1": 55.6,
+      "median": 68.8,
+      "q3": 80.5,
+      "max": 95.8
+    },
+    "Indie": {
+      "min": 31.5,
+      "q1": 67.9,
+      "median": 80.0,
+      "q3": 88.8,
+      "max": 97.9
+    },
+    "RPG": {
+      "min": 33.5,
+      "q1": 66.8,
+      "median": 77.7,
+      "q3": 87.7,
+      "max": 97.7
+    },
+    "Racing": {
+      "min": 20.4,
+      "q1": 62.4,
+      "median": 74.7,
+      "q3": 83.2,
+      "max": 93.7
+    },
+    "Sexual Content": {
+      "min": 36.1,
+      "q1": 72.6,
+      "median": 81.6,
+      "q3": 89.3,
+      "max": 97.3
+    },
+    "Simulation": {
+      "min": 13.6,
+      "q1": 51.2,
+      "median": 67.8,
+      "q3": 81.8,
+      "max": 96.0
+    },
+    "Strategy": {
+      "min": 19.0,
+      "q1": 64.0,
+      "median": 77.7,
+      "q3": 86.2,
+      "max": 97.2
+    },
+    "Violent": {
+      "min": 28.2,
+      "q1": 56.4,
+      "median": 71.6,
+      "q3": 84.3,
+      "max": 97.1
+    }
+  }
+}

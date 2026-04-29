@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam游戏评分影响因素的统计探索</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <style>
+        :root {
+            --primary: #1b2838;
+            --primary-light: #2a475e;
+            --accent: #66c0f4;
+            --accent-green: #5ba32b;
+            --accent-red: #e74c3c;
+            --bg: #1b1b2f;
+            --bg-card: #162447;
+            --bg-card-light: #1f3460;
+            --text: #c7d5e0;
+            --text-light: #8f98a0;
+            --text-bright: #ffffff;
+            --border: #2a475e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--primary);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 60px;
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-right: 40px;
+            white-space: nowrap;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+        }
+        .nav-tab {
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            white-space: nowrap;
+            transition: all 0.2s;
+            color: var(--text-light);
+            background: transparent;
+            border: none;
+        }
+        .nav-tab:hover { background: var(--primary-light); color: var(--text-bright); }
+        .nav-tab.active { background: var(--accent); color: var(--primary); font-weight: 600; }
+        /* 主体 */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px 40px;
+        }
+        .module {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .module.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* 模块头部 */
+        .module-header {
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .module-header h2 {
+            font-size: 28px;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+        .module-header .research-question {
+            font-size: 16px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .module-header p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        /* 指标卡片 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .metric-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .metric-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .metric-card .label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        /* 图表容器 */
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .chart-row.full { grid-template-columns: 1fr; }
+        .chart-box {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        .chart-box h3 {
+            font-size: 15px;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+        .chart-container {
+            width: 100%;
+            height: 380px;
+        }
+        .chart-container.tall { height: 450px; }
+        .chart-container.short { height: 300px; }
+        /* 结论卡片 */
+        .conclusion-box {
+            background: var(--bg-card-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-top: 32px;
+        }
+        .conclusion-box h3 {
+            color: var(--accent);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .conclusion-box ul {
+            padding-left: 20px;
+            color: var(--text);
+            font-size: 14px;
+        }
+        .conclusion-box li { margin-bottom: 6px; }
+        /* 统计结果面板 */
+        .stats-panel {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .stats-panel h3 {
+            font-size: 15px;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(42,71,94,0.5);
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: var(--text-light); font-size: 14px; }
+        .stat-value { font-weight: 600; font-size: 15px; }
+        .stat-value.sig { color: var(--accent-green); }
+        .stat-value.notsig { color: var(--accent-red); }
+        /* 交互控件 */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .controls label {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        .controls input[type="range"] {
+            -webkit-appearance: none;
+            height: 6px;
+            background: var(--primary-light);
+            border-radius: 3px;
+            outline: none;
+            width: 200px;
+        }
+        .controls input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+        .controls select {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .controls .value-display {
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 40px;
+            text-align: center;
+        }
+        /* 方法说明 */
+        .method-note {
+            background: rgba(102, 192, 244, 0.08);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .method-note code {
+            background: rgba(102,192,244,0.15);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        /* 数据来源 */
+        .data-source {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+            font-size: 12px;
+        }
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .chart-row { grid-template-columns: 1fr; }
+            .nav-tabs { gap: 2px; }
+            .nav-tab { padding: 6px 10px; font-size: 12px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .nav-title { font-size: 14px; margin-right: 16px; }
+            .module-header h2 { font-size: 22px; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="nav-title">📊 Steam游戏评分的统计探索</div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-module="1">描述性统计</button>
+            <button class="nav-tab" data-module="2">假设检验</button>
+            <button class="nav-tab" data-module="3">相关与回归</button>
+            <button class="nav-tab" data-module="4">方差分析</button>
+            <button class="nav-tab" data-module="5">贝叶斯推断</button>
+        </div>
+    </div>
+</nav>
+
+<main>
+
+<!-- ========== 模块1: 描述性统计 ========== -->
+<div class="module active" id="module1">
+    <div class="module-header">
+        <h2>模块一：数据全景概览</h2>
+        <div class="research-question">Steam上几万款游戏长什么样？价格、好评率、类型如何分布？</div>
+        <p>统计方法：描述性统计（均值、中位数、标准差、偏度、频率分布）| 数据：11,818款有效游戏（评价数≥50）</p>
+    </div>
+
+    <div class="metrics-grid" id="metrics-grid"></div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>📈 每年上架游戏数量（2005-2019）</h3>
+            <div class="chart-container" id="chart-yearly"></div>
+        </div>
+        <div class="chart-box">
+            <h3>💰 价格分布</h3>
+            <div class="chart-container" id="chart-price-dist"></div>
+        </div>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>👍 好评率分布</h3>
+            <div class="chart-container" id="chart-ratio-dist"></div>
+        </div>
+        <div class="chart-box">
+            <h3>🎮 游戏类型分布（前12）</h3>
+            <div class="chart-container" id="chart-genre-dist"></div>
+        </div>
+    </div>
+
+    <div class="chart-row full">
+        <div class="chart-box">
+            <h3>🎯 价格 vs 好评率（按类型着色）</h3>
+            <div class="chart-container tall" id="chart-scatter"></div>
+        </div>
+    </div>
+
+    <div class="conclusion-box">
+        <h3>📌 关键发现</h3>
+        <ul id="conclusion1"></ul>
+    </div>
+</div>
+
+<!-- ========== 模块2: 假设检验 ========== -->
+<div class="module" id="module2">
+    <div class="module-header">
+        <h2>模块二：独立游戏 vs 大厂游戏</h2>
+        <div class="research-question">独立游戏和大厂游戏的好评率是否存在显著差异？差多少算"真的差"？</div>
+        <p>统计方法：Welch's t检验（双样本t检验，不假设等方差）| 交互：拖动滑块改变"大厂"定义，观察P值实时变化</p>
+    </div>
+
+    <div class="method-note">
+        <strong>假设检验思路：</strong>
+        <code>H₀</code>：独立游戏与大厂游戏好评率均值无显著差异 | <code>H₁</code>：存在显著差异。
+        通过Welch's t检验计算P值，若P &lt; 0.05则拒绝H₀，认为差异具有统计显著性。同时报告Cohen's d效应量衡量差异的实际大小。
+    </div>
+
+    <div class="controls">
+        <label>大厂判定标准：开发游戏数 ≥ </label>
+        <input type="range" id="threshold-slider" min="2" max="20" step="1" value="5">
+        <span class="value-display" id="threshold-value">5</span>
+        <label> 款</label>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>📦 好评率对比（箱线图）</h3>
+            <div class="chart-container" id="chart-boxplot"></div>
+        </div>
+        <div class="stats-panel">
+            <h3>📊 检验结果</h3>
+            <div id="test-results"></div>
+        </div>
+    </div>
+
+    <div class="chart-row full">
+        <div class="chart-box">
+            <h3>📐 不同阈值下的P值变化</h3>
+            <div class="chart-container short" id="chart-pvalues"></div>
+        </div>
+    </div>
+
+    <div class="conclusion-box">
+        <h3>📌 关键发现</h3>
+        <ul id="conclusion2"></ul>
+    </div>
+</div>
+
+<!-- ========== 模块3: 相关与回归 ========== -->
+<div class="module" id="module3">
+    <div class="module-header">
+        <h2>模块三：什么驱动了好评率？</h2>
+        <div class="research-question">价格、游玩时长、评论数等因素与好评率的关系如何？哪些因素真正有影响？</div>
+        <p>统计方法：Pearson/Spearman相关分析、多重线性回归、F检验</p>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>🔥 相关系数矩阵</h3>
+            <div class="chart-container" id="chart-corr-matrix"></div>
+        </div>
+        <div class="chart-box">
+            <h3>🌲 回归系数森林图</h3>
+            <div class="chart-container" id="chart-forest"></div>
+        </div>
+    </div>
+
+    <div class="stats-panel">
+        <h3>📊 回归模型摘要</h3>
+        <div id="regression-summary"></div>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>📈 价格 vs 好评率</h3>
+            <div class="chart-container" id="chart-scatter-price"></div>
+        </div>
+        <div class="chart-box">
+            <h3>⏱ 游玩时长 vs 好评率</h3>
+            <div class="chart-container" id="chart-scatter-playtime"></div>
+        </div>
+    </div>
+
+    <div class="conclusion-box">
+        <h3>📌 关键发现</h3>
+        <ul id="conclusion3"></ul>
+    </div>
+</div>
+
+<!-- ========== 模块4: ANOVA ========== -->
+<div class="module" id="module4">
+    <div class="module-header">
+        <h2>模块四：不同类型之间差多少？</h2>
+        <div class="research-question">不同游戏类型的好评率是否存在显著差异？具体哪两组之间不同？</div>
+        <p>统计方法：单因素ANOVA + Tukey HSD事后多重比较</p>
+    </div>
+
+    <div class="method-note">
+        <strong>方法说明：</strong>
+        <code>ANOVA</code> 检验各组均值是否相等（H₀：所有类型好评率均值相等）。
+        若ANOVA显著，则用 <code>Tukey HSD</code> 进行两两事后比较，找出具体哪两组之间存在显著差异。
+    </div>
+
+    <div class="stats-panel">
+        <h3>📊 ANOVA检验结果</h3>
+        <div id="anova-results"></div>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>📦 各类型好评率分布（箱线图）</h3>
+            <div class="chart-container tall" id="chart-anova-box"></div>
+        </div>
+    </div>
+
+    <div class="chart-row full">
+        <div class="chart-box">
+            <h3>🗺 Tukey HSD 事后比较热力图（P值矩阵）</h3>
+            <div class="chart-container" id="chart-tukey-heatmap"></div>
+        </div>
+    </div>
+
+    <div class="conclusion-box">
+        <h3>📌 关键发现</h3>
+        <ul id="conclusion4"></ul>
+    </div>
+</div>
+
+<!-- ========== 模块5: 贝叶斯推断 ========== -->
+<div class="module" id="module5">
+    <div class="module-header">
+        <h2>模块五：有了新证据，你的看法会变吗？</h2>
+        <div class="research-question">给定一款新游戏的类型和价格，它好评率高的概率有多大？</div>
+        <p>统计方法：贝叶斯推断（Beta共轭先验 + 二项似然）| 交互：选择游戏特征，观察先验→后验更新过程</p>
+    </div>
+
+    <div class="method-note">
+        <strong>贝叶斯更新原理：</strong>
+        先验分布（Beta分布）代表"观察数据前的信念"，似然函数代表"数据提供的证据"。
+        <code>后验 ∝ 先验 × 似然</code>。
+        随着观测数据增多，后验分布逐渐收窄并向真实值集中——数据越多，不确定性越小。
+    </div>
+
+    <div class="controls">
+        <label>游戏类型：</label>
+        <select id="bayes-genre-select"></select>
+        <label style="margin-left:16px">价格区间：</label>
+        <select id="bayes-price-select"></select>
+    </div>
+
+    <div class="chart-row full">
+        <div class="chart-box">
+            <h3>🔄 贝叶斯更新过程（先验 → 后验）</h3>
+            <div class="chart-container tall" id="chart-bayesian-update"></div>
+        </div>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3>🎮 各类型后验均值对比</h3>
+            <div class="chart-container" id="chart-bayes-genre-bar"></div>
+        </div>
+        <div class="stats-panel">
+            <h3>📊 当前选择的贝叶斯分析</h3>
+            <div id="bayes-stats"></div>
+        </div>
+    </div>
+
+    <div class="conclusion-box">
+        <h3>📌 关键发现</h3>
+        <ul id="conclusion5"></ul>
+    </div>
+</div>
+
+<div class="data-source">
+    数据来源：Steam Store Games Dataset (Kaggle) | 27,075款游戏 → 筛选评价数≥50后剩余11,818款 | 分析工具：Python (scipy, statsmodels, sklearn) + ECharts
+</div>
+
+</main>
+
+<script>
+// ============================================================
+// 数据加载
+// ============================================================
+const DATA = {};
+let currentModule = 1;
+
+async function loadData() {
+    const files = [
+        ['module1', 'data_module1_descriptive.json'],
+        ['module2', 'data_module2_hypothesis.json'],
+        ['module3', 'data_module3_correlation.json'],
+        ['module4', 'data_module4_anova.json'],
+        ['module5', 'data_module5_bayesian.json'],
+    ];
+    const promises = files.map(([key, file]) =>
+        fetch(file).then(r => r.json()).then(d => DATA[key] = d)
+    );
+    await Promise.all(promises);
+    initAllModules();
+}
+
+// ============================================================
+// 导航切换
+// ============================================================
+document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        const mod = tab.dataset.module;
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('module' + mod).classList.add('active');
+        currentModule = parseInt(mod);
+        // 重新resize当前模块的图表
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+    });
+});
+
+// ============================================================
+// ECharts 通用深色主题
+// ============================================================
+const DARK_THEME = {
+    backgroundColor: 'transparent',
+    textStyle: { color: '#c7d5e0' },
+    title: { textStyle: { color: '#ffffff' } },
+    legend: { textStyle: { color: '#c7d5e0' } },
+    grid: { containLabel: true },
+};
+
+function makeChart(domId) {
+    const el = document.getElementById(domId);
+    if (!el) return null;
+    const chart = echarts.init(el, null, { renderer: 'canvas' });
+    return chart;
+}
+
+function mergeOption(base) {
+    return Object.assign({}, DARK_THEME, base);
+}
+
+// ============================================================
+// 模块1: 描述性统计
+// ============================================================
+function initModule1() {
+    const d = DATA.module1;
+    if (!d) return;
+
+    // 指标卡片
+    const m = d.key_metrics;
+    document.getElementById('metrics-grid').innerHTML = `
+        <div class="metric-card"><div class="value">${m.total_games.toLocaleString()}</div><div class="label">有效游戏总数</div></div>
+        <div class="metric-card"><div class="value">$${m.median_price}</div><div class="label">价格中位数</div></div>
+        <div class="metric-card"><div class="value">${m.median_positive_ratio}%</div><div class="label">好评率中位数</div></div>
+        <div class="metric-card"><div class="value">${m.median_playtime}h</div><div class="label">平均游玩时长中位数</div></div>
+        <div class="metric-card"><div class="value">$${m.avg_price}</div><div class="label">价格均值（偏度${m.skew_price}）</div></div>
+        <div class="metric-card"><div class="value">${m.avg_positive_ratio}%</div><div class="label">好评率均值</div></div>
+    `;
+
+    // 每年游戏数量
+    const c1 = makeChart('chart-yearly');
+    c1.setOption(mergeOption({
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: d.yearly_counts.map(i => i.year), axisLabel: { rotate: 45 } },
+        yAxis: { type: 'value', name: '游戏数量' },
+        series: [{
+            type: 'bar',
+            data: d.yearly_counts.map(i => i.count),
+            itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#66c0f4' }, { offset: 1, color: '#1b2838' }]) },
+        }],
+        dataZoom: [{ type: 'inside' }],
+    }));
+
+    // 价格分布
+    const c2 = makeChart('chart-price-dist');
+    c2.setOption(mergeOption({
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: d.price_distribution.map(i => i.range) },
+        yAxis: { type: 'value', name: '游戏数量' },
+        series: [{
+            type: 'bar',
+            data: d.price_distribution.map(i => i.count),
+            itemStyle: { color: '#5ba32b', borderRadius: [4, 4, 0, 0] },
+        }],
+    }));
+
+    // 好评率分布
+    const c3 = makeChart('chart-ratio-dist');
+    c3.setOption(mergeOption({
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: d.ratio_distribution.map(i => i.range), axisLabel: { rotate: 45, fontSize: 10 } },
+        yAxis: { type: 'value', name: '游戏数量' },
+        series: [{
+            type: 'bar',
+            data: d.ratio_distribution.map(i => i.count),
+            itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#e74c3c' }, { offset: 1, color: '#66c0f4' }]) },
+            borderRadius: [2, 2, 0, 0],
+        }],
+    }));
+
+    // 类型分布
+    const genreColors = ['#66c0f4', '#5ba32b', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#e67e22', '#3498db', '#2ecc71', '#e91e63', '#ff6b6b', '#48dbfb'];
+    const c4 = makeChart('chart-genre-dist');
+    c4.setOption(mergeOption({
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'value', name: '游戏数量' },
+        yAxis: { type: 'category', data: d.genre_distribution.map(i => i.genre).reverse(), axisLabel: { fontSize: 12 } },
+        series: [{
+            type: 'bar',
+            data: d.genre_distribution.map((i, idx) => ({ value: i.count, itemStyle: { color: genreColors[idx % genreColors.length] } })).reverse(),
+            borderRadius: [0, 4, 4, 0],
+        }],
+    }));
+
+    // 散点图
+    const genreList = [...new Set(d.scatter_sample.map(i => i.genre))];
+    const scatterSeries = genreList.map((genre, idx) => ({
+        name: genre,
+        type: 'scatter',
+        data: d.scatter_sample.filter(i => i.genre === genre).map(i => [i.price, i.positive_ratio]),
+        symbolSize: 4,
+        itemStyle: { color: genreColors[idx % genreColors.length], opacity: 0.6 },
+    }));
+    const c5 = makeChart('chart-scatter');
+    c5.setOption(mergeOption({
+        tooltip: {
+            formatter: p => `${p.seriesName}<br/>价格: $${p.data[0]}<br/>好评率: ${p.data[1]}%`
+        },
+        legend: { data: genreList, top: 0, textStyle: { fontSize: 11 } },
+        xAxis: { type: 'value', name: '价格 ($)', max: 80 },
+        yAxis: { type: 'value', name: '好评率 (%)', min: 30, max: 100 },
+        series: scatterSeries,
+    }));
+
+    // 结论
+    document.getElementById('conclusion1').innerHTML = `
+        <li>Steam平台共${m.total_games.toLocaleString()}款有效游戏（评价≥50），覆盖1997-2019年</li>
+        <li>价格呈明显右偏分布（偏度${m.skew_price}），中位数$${m.median_price}，说明大多数游戏定价集中在低价区间</li>
+        <li>好评率中位数${m.median_positive_ratio}%，均值${m.avg_positive_ratio}%，整体偏向正面评价</li>
+        <li>Action和Indie是最常见的游戏类型，占据绝对数量优势</li>
+        <li>从散点图来看，低价区（$0-20）游戏密度最高，且好评率分布跨度大；高价游戏数量少但好评率相对集中</li>
+    `;
+}
+
+// ============================================================
+// 模块2: 假设检验
+// ============================================================
+function initModule2() {
+    const d = DATA.module2;
+    if (!d) return;
+
+    const slider = document.getElementById('threshold-slider');
+    const valueDisplay = document.getElementById('threshold-value');
+
+    function updateForThreshold(threshold) {
+        const result = d.threshold_results.find(r => r.threshold === threshold);
+        if (!result) return;
+
+        // 箱线图
+        const bp = d.box_data;
+        const boxIndie = bp.indie;
+        const boxMajor = bp.major;
+        const chart = makeChart('chart-boxplot');
+        chart.setOption(mergeOption({
+            tooltip: { trigger: 'item' },
+            yAxis: { type: 'value', name: '好评率 (%)', min: 0.3, max: 1.0, axisLabel: { formatter: v => (v*100).toFixed(0) + '%' } },
+            xAxis: { type: 'category', data: [`独立游戏 (n=${result.indie_n})`, `大厂游戏 (n=${result.major_n})`] },
+            series: [{
+                type: 'boxplot',
+                data: [
+                    [boxIndie.min, boxIndie.q1, boxIndie.median, boxIndie.q3, boxIndie.max],
+                    [boxMajor.min, boxMajor.q1, boxMajor.median, boxMajor.q3, boxMajor.max],
+                ],
+                itemStyle: { color: '#66c0f4', borderColor: '#2a475e' },
+            }],
+        }));
+
+        // 检验结果
+        const sigClass = result.significant ? 'sig' : 'notsig';
+        const sigText = result.significant ? '✓ 显著' : '✗ 不显著';
+        const sigEmoji = result.significant ? '🟢' : '🔴';
+
+        document.getElementById('test-results').innerHTML = `
+            <div class="stat-row"><span class="stat-label">独立游戏均值</span><span class="stat-value">${result.indie_mean}% (σ=${result.indie_std}%)</span></div>
+            <div class="stat-row"><span class="stat-label">大厂游戏均值</span><span class="stat-value">${result.major_mean}% (σ=${result.major_std}%)</span></div>
+            <div class="stat-row"><span class="stat-label">均值差</span><span class="stat-value">${(result.major_mean - result.indie_mean).toFixed(1)}个百分点</span></div>
+            <div class="stat-row"><span class="stat-label">t 统计量</span><span class="stat-value">${result.t_statistic}</span></div>
+            <div class="stat-row"><span class="stat-label">P 值</span><span class="stat-value ${sigClass}">${result.p_value} ${sigEmoji} ${sigText}</span></div>
+            <div class="stat-row"><span class="stat-label">Cohen's d (效应量)</span><span class="stat-value">${result.cohens_d} (${Math.abs(result.cohens_d) < 0.2 ? '极小' : Math.abs(result.cohens_d) < 0.5 ? '小' : Math.abs(result.cohens_d) < 0.8 ? '中等' : '大'}效应)</span></div>
+            <div class="stat-row"><span class="stat-label">判定标准</span><span class="stat-value">开发游戏数 ≥ ${threshold} 款</span></div>
+        `;
+    }
+
+    slider.addEventListener('input', () => {
+        const v = parseInt(slider.value);
+        valueDisplay.textContent = v;
+        updateForThreshold(v);
+    });
+
+    updateForThreshold(d.default_threshold);
+
+    // P值趋势图
+    const c2 = makeChart('chart-pvalues');
+    const thresholds = d.threshold_results.map(r => r.threshold);
+    const pvalues = d.threshold_results.map(r => r.p_value);
+    c2.setOption(mergeOption({
+        tooltip: { trigger: 'axis', formatter: p => `阈值: ≥${p[0].axisValue}款<br/>P值: ${p[0].data}` },
+        xAxis: { type: 'category', data: thresholds, name: '大厂判定阈值' },
+        yAxis: { type: 'value', name: 'P值', min: 0 },
+        series: [
+            {
+                type: 'line', data: pvalues, smooth: true,
+                lineStyle: { color: '#66c0f4', width: 3 },
+                areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(102,192,244,0.3)' }, { offset: 1, color: 'rgba(102,192,244,0)' }]) },
+                markLine: { data: [{ yAxis: 0.05, label: { formatter: 'α=0.05', color: '#e74c3c' }, lineStyle: { color: '#e74c3c', type: 'dashed' } }] },
+            }
+        ],
+    }));
+
+    // 结论
+    const sigResults = d.threshold_results.filter(r => r.significant);
+    const notSigResults = d.threshold_results.filter(r => !r.significant);
+    document.getElementById('conclusion2').innerHTML = `
+        <li>在不同阈值设定下，结论并不一致：${notSigResults.length}种阈值下不显著，${sigResults.length}种阈值下显著</li>
+        <li>这说明"独立游戏vs大厂游戏"的差异对分组定义敏感——统计结论不是绝对的，它依赖于你如何定义"大厂"</li>
+        <li>即使在显著的阈值下，Cohen's d效应量也很小（${d.threshold_results.map(r => r.cohens_d).map(Math.abs).sort((a,b)=>b-a)[0]}），说明实际差异很小</li>
+        <li><strong>核心洞察：</strong>交互式演示展示了统计结论的条件性——换一个定义方式，结论就可能翻转。这是假设检验最常被忽略的要点。</li>
+    `;
+}
+
+// ============================================================
+// 模块3: 相关与回归
+// ============================================================
+function initModule3() {
+    const d = DATA.module3;
+    if (!d) return;
+
+    // 相关系数热力图
+    const c1 = makeChart('chart-corr-matrix');
+    const vars = d.correlation_matrix.variables;
+    const matrix = d.correlation_matrix.matrix;
+    const heatData = [];
+    for (let i = 0; i < vars.length; i++) {
+        for (let j = 0; j < vars.length; j++) {
+            heatData.push([j, i, matrix[i][j]]);
+        }
+    }
+    c1.setOption(mergeOption({
+        tooltip: { formatter: p => `${vars[p.data[1]]} vs ${vars[p.data[0]]}<br/>r = ${p.data[2]}` },
+        xAxis: { type: 'category', data: vars, axisLabel: { fontSize: 11 } },
+        yAxis: { type: 'category', data: vars, axisLabel: { fontSize: 11 } },
+        visualMap: { min: -0.5, max: 0.5, calculable: true, orient: 'horizontal', left: 'center', bottom: 0, inRange: { color: ['#e74c3c', '#1b2838', '#66c0f4'] }, textStyle: { color: '#c7d5e0' } },
+        series: [{ type: 'heatmap', data: heatData, label: { show: true, formatter: p => p.data[2].toFixed(2), fontSize: 11 } }],
+    }));
+
+    // 森林图
+    const coef = d.regression.coefficients.filter(c => c.name !== '截距');
+    const c2 = makeChart('chart-forest');
+    c2.setOption(mergeOption({
+        tooltip: { trigger: 'axis' },
+        yAxis: { type: 'category', data: coef.map(c => c.name).reverse() },
+        xAxis: { type: 'value', name: '回归系数 (百分点)', min: -15, max: 15 },
+        series: [
+            {
+                type: 'bar', data: coef.map(c => ({
+                    value: c.coefficient,
+                    itemStyle: { color: c.significant ? (c.coefficient > 0 ? '#5ba32b' : '#e74c3c') : '#8f98a0' },
+                    label: { show: true, position: c.coefficient >= 0 ? 'right' : 'left', formatter: c.coefficient > 0 ? `+${c.coefficient}` : `${c.coefficient}`, fontSize: 12, fontWeight: 'bold' },
+                })).reverse(),
+                barWidth: 16,
+            }
+        ],
+        markLine: { data: [{ xAxis: 0 }] },
+    }));
+
+    // 回归摘要
+    const r = d.regression;
+    document.getElementById('regression-summary').innerHTML = `
+        <div class="stat-row"><span class="stat-label">样本量 (n)</span><span class="stat-value">${r.n.toLocaleString()}</span></div>
+        <div class="stat-row"><span class="stat-label">R²</span><span class="stat-value">${r.r_squared}</span></div>
+        <div class="stat-row"><span class="stat-label">调整 R²</span><span class="stat-value">${r.adj_r_squared}</span></div>
+        <div class="stat-row"><span class="stat-label">F 统计量</span><span class="stat-value">${r.f_statistic}</span></div>
+        <div class="stat-row"><span class="stat-label">F检验 P值</span><span class="stat-value ${r.f_p_value < 0.05 ? 'sig' : 'notsig'}">${r.f_p_value < 0.001 ? '< 0.001' : r.f_p_value}</span></div>
+        <div class="stat-row"><span class="stat-label">方程</span><span class="stat-value" style="font-size:13px;">好评率 = ${r.coefficients[0].coefficient > 0 ? '+' : ''}${r.coefficients[0].coefficient} + ${r.coefficients.map((c,i) => i > 0 ? `${c.coefficient > 0 ? '+' : ''}${c.coefficient}×${c.name.replace('log(', '').replace(')', '')}` : '').join(' ')}</span></div>
+    `;
+
+    // 散点图
+    function makeScatter(domId, data, xName, color) {
+        const chart = makeChart(domId);
+        chart.setOption(mergeOption({
+            tooltip: { formatter: p => `${p.data[2]}<br/>${xName}: ${p.data[0]}<br/>好评率: ${p.data[1]}%` },
+            xAxis: { type: 'value', name: xName },
+            yAxis: { type: 'value', name: '好评率 (%)', min: 30, max: 100 },
+            series: [{
+                type: 'scatter', data: data.map(i => [i.x, i.y, i.name]),
+                symbolSize: 4, itemStyle: { color, opacity: 0.5 },
+            }],
+        }));
+    }
+    makeScatter('chart-scatter-price', d.scatter_pairs.price, '价格 ($)', '#e67e22');
+    makeScatter('chart-scatter-playtime', d.scatter_pairs.average_playtime, '游玩时长 (h)', '#3498db');
+
+    // 结论
+    document.getElementById('conclusion3').innerHTML = `
+        <li>调整R²仅为${r.adj_r_squared}，说明价格、游玩时长、评论数、游戏年龄只能解释好评率变异的一小部分——好评率受到更多未纳入模型的因素影响</li>
+        <li>在纳入的因素中，<strong>游玩时长与好评率正相关最强</strong>（${d.pearson.find(p => p.variable.includes('时长')).r}），说明越让人投入的游戏越受好评</li>
+        <li>价格与好评率呈微弱负相关（${d.pearson.find(p => p.variable.includes('价格')).r}），但这不意味着"降价就能提高好评"——可能是贵的游戏期望值更高</li>
+        <li>评价总数与好评率的相关性在实际应用中可能存在因果倒置：好游戏吸引更多评价，而不是评价多导致好评率高</li>
+    `;
+}
+
+// ============================================================
+// 模块4: ANOVA
+// ============================================================
+function initModule4() {
+    const d = DATA.module4;
+    if (!d) return;
+
+    // ANOVA结果
+    const a = d.anova;
+    document.getElementById('anova-results').innerHTML = `
+        <div class="stat-row"><span class="stat-label">组数（游戏类型）</span><span class="stat-value">${d.genres.length}</span></div>
+        <div class="stat-row"><span class="stat-label">F 统计量</span><span class="stat-value">${a.f_statistic}</span></div>
+        <div class="stat-row"><span class="stat-label">P 值</span><span class="stat-value ${a.significant ? 'sig' : 'notsig'}">${a.p_value < 0.001 ? '< 0.001' : a.p_value}</span></div>
+        <div class="stat-row"><span class="stat-label">结论</span><span class="stat-value ${a.significant ? 'sig' : 'notsig'}">${a.significant ? '✓ 拒绝H₀：至少有一组好评率均值与其他组存在显著差异' : '✗ 不能拒绝H₀'}</span></div>
+    `;
+
+    // 箱线图
+    const boxData = d.genres.map(g => {
+        const b = d.genre_box_data[g];
+        return [b.min, b.q1, b.median, b.q3, b.max];
+    });
+    const c1 = makeChart('chart-anova-box');
+    c1.setOption(mergeOption({
+        tooltip: { trigger: 'item' },
+        xAxis: { type: 'category', data: d.genres, axisLabel: { rotate: 30, fontSize: 11 } },
+        yAxis: { type: 'value', name: '好评率 (%)', min: 40, max: 100 },
+        series: [{ type: 'boxplot', data: boxData, itemStyle: { color: '#66c0f4', borderColor: '#2a475e' } }],
+        dataZoom: [{ type: 'inside' }],
+    }));
+
+    // Tukey HSD热力图
+    const genres = d.tukey_matrix.genres;
+    const matrix = d.tukey_matrix.matrix;
+    const heatData = [];
+    for (let i = 0; i < genres.length; i++) {
+        for (let j = 0; j < genres.length; j++) {
+            heatData.push([j, i, matrix[i][j]]);
+        }
+    }
+    const c2 = makeChart('chart-tukey-heatmap');
+    c2.setOption(mergeOption({
+        tooltip: { formatter: p => {
+            if (p.data[0] === p.data[1]) return '';
+            return `${genres[p.data[1]]} vs ${genres[p.data[0]]}<br/>P值: ${p.data[2]}`;
+        }},
+        xAxis: { type: 'category', data: genres, axisLabel: { rotate: 45, fontSize: 10 } },
+        yAxis: { type: 'category', data: genres, axisLabel: { fontSize: 10 } },
+        visualMap: {
+            min: 0, max: 0.05, calculable: true, orient: 'horizontal', left: 'center', bottom: 0,
+            inRange: { color: ['#1b2838', '#e74c3c'] },
+            textStyle: { color: '#c7d5e0' },
+            text: ['显著 (P<0.05)', '不显著'],
+        },
+        series: [{ type: 'heatmap', data: heatData, label: { show: true, formatter: p => p.data[0] === p.data[1] ? '-' : (p.data[2] < 0.001 ? '<.001' : p.data[2].toFixed(3)), fontSize: 9 } }],
+    }));
+
+    // 结论
+    const sigPairs = d.tukey_pairs.filter(p => p.reject);
+    const notSigPairs = d.tukey_pairs.filter(p => !p.reject);
+    document.getElementById('conclusion4').innerHTML = `
+        <li>ANOVA高度显著（F=${a.f_statistic}, P${a.p_value < 0.001 ? '<0.001' : '=' + a.p_value}），不同游戏类型的好评率确实存在差异</li>
+        <li>Tukey HSD事后比较发现${sigPairs.length}对类型之间存在显著差异，${notSigPairs.length}对差异不显著</li>
+        <li>差异最大的组合：${sigPairs.sort((a,b) => Math.abs(b.mean_diff) - Math.abs(a.mean_diff)).slice(0,3).map(p => `${p.group1} vs ${p.group2}（差${p.mean_diff}个百分点）`).join('；')}</li>
+        <li>部分类型（如Simulation与RPG）差异不显著，说明"类型"并非好评率的唯一决定因素</li>
+    `;
+}
+
+// ============================================================
+// 模块5: 贝叶斯推断
+// ============================================================
+function initModule5() {
+    const d = DATA.module5;
+    if (!d) return;
+
+    // 填充选择器
+    const genreSelect = document.getElementById('bayes-genre-select');
+    const priceSelect = document.getElementById('bayes-price-select');
+    const genres = Object.keys(d.genre_data);
+    const prices = Object.keys(d.price_data);
+
+    genres.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g; opt.textContent = `${g} (n=${d.genre_data[g].n_obs})`;
+        genreSelect.appendChild(opt);
+    });
+    prices.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p; opt.textContent = p;
+        priceSelect.appendChild(opt);
+    });
+
+    function updateBayesian() {
+        const genre = genreSelect.value;
+        const priceRange = priceSelect.value;
+        const gData = d.genre_data[genre];
+        const pData = d.price_data[priceRange];
+
+        if (!gData || !pData) return;
+
+        // 贝叶斯更新曲线
+        const chart = makeChart('chart-bayesian-update');
+        const priorData = gData.prior.distribution.map(p => [p.x * 100, p.y]);
+        const posteriorData = gData.posterior.distribution.map(p => [p.x * 100, p.y]);
+
+        chart.setOption(mergeOption({
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['先验 Beta(2,2)', `后验（${genre}, n=${gData.n_obs}）`, `后验（${priceRange}）`], top: 0 },
+            xAxis: { type: 'value', name: '好评率 (%)', min: 30, max: 100 },
+            yAxis: { type: 'value', name: '概率密度' },
+            series: [
+                { name: '先验 Beta(2,2)', type: 'line', data: priorData, lineStyle: { color: '#8f98a0', type: 'dashed', width: 2 }, symbol: 'none' },
+                { name: `后验（${genre}, n=${gData.n_obs}）`, type: 'line', data: posteriorData, lineStyle: { color: '#66c0f4', width: 3 }, areaStyle: { color: 'rgba(102,192,244,0.15)' }, symbol: 'none' },
+                { name: `后验（${priceRange}）`, type: 'line', data: pData.distribution.map(p => [p.x * 100, p.y]), lineStyle: { color: '#5ba32b', width: 3 }, areaStyle: { color: 'rgba(91,163,43,0.1)' }, symbol: 'none' },
+            ],
+        }));
+
+        // 各类型后验均值对比柱状图
+        const barChart = makeChart('chart-bayes-genre-bar');
+        const barData = genres.map(g => ({
+            name: g,
+            value: d.genre_data[g].posterior.mean,
+            n: d.genre_data[g].n_obs,
+        })).sort((a, b) => b.value - a.value);
+        barChart.setOption(mergeOption({
+            tooltip: { trigger: 'axis', formatter: p => `${p[0].name}<br/>后验均值: ${p[0].data.value}%` },
+            xAxis: { type: 'value', name: '后验均值 (%)', min: 60, max: 100 },
+            yAxis: { type: 'category', data: barData.map(b => b.name), axisLabel: { fontSize: 11 } },
+            series: [{
+                type: 'bar',
+                data: barData.map(b => ({ value: b.value, itemStyle: { color: b.name === genre ? '#66c0f4' : '#2a475e' } })),
+                barWidth: 16, borderRadius: [0, 4, 4, 0],
+            }],
+        }));
+
+        // 统计面板
+        document.getElementById('bayes-stats').innerHTML = `
+            <div style="margin-bottom:12px;color:var(--accent);font-weight:600;">类型：${genre}</div>
+            <div class="stat-row"><span class="stat-label">观测游戏数</span><span class="stat-value">${gData.n_obs}</span></div>
+            <div class="stat-row"><span class="stat-label">观测好评率均值</span><span class="stat-value">${gData.observed_mean}%</span></div>
+            <div class="stat-row"><span class="stat-label">先验 Beta(2,2) 均值</span><span class="stat-value">50.0%</span></div>
+            <div class="stat-row"><span class="stat-label">后验均值</span><span class="stat-value">${gData.posterior.mean}%</span></div>
+            <div class="stat-row"><span class="stat-label">后验参数</span><span class="stat-value">Beta(${gData.posterior.alpha}, ${gData.posterior.beta})</span></div>
+            <hr style="border-color:var(--border);margin:12px 0">
+            <div style="margin-bottom:12px;color:#5ba32b;font-weight:600;">价格：${priceRange}</div>
+            <div class="stat-row"><span class="stat-label">观测游戏数</span><span class="stat-value">${pData.n_obs}</span></div>
+            <div class="stat-row"><span class="stat-label">观测好评率均值</span><span class="stat-value">${pData.observed_mean}%</span></div>
+            <div class="stat-row"><span class="stat-label">后验均值</span><span class="stat-value">${pData.posterior_mean}%</span></div>
+        `;
+    }
+
+    genreSelect.addEventListener('change', updateBayesian);
+    priceSelect.addEventListener('change', updateBayesian);
+    updateBayesian();
+
+    // 结论
+    const sortedGenres = genres.map(g => ({ name: g, mean: d.genre_data[g].posterior.mean })).sort((a, b) => b.mean - a.mean);
+    const sortedPrices = Object.entries(d.price_data).map(([k, v]) => ({ name: k, mean: v.posterior_mean })).sort((a, b) => b.mean - a.mean);
+
+    document.getElementById('conclusion5').innerHTML = `
+        <li>从"无偏见"的先验（Beta(2,2)，均值50%）出发，经过数据更新后，各类型的后验均值差异明显</li>
+        <li>后验均值最高的类型：${sortedGenres.slice(0, 3).map(g => `${g.name}(${g.mean}%)`).join('、')}</li>
+        <li>后验均值最低的类型：${sortedGenres.slice(-3).reverse().map(g => `${g.name}(${g.mean}%)`).join('、')}</li>
+        <li>从价格维度看，${sortedPrices[0].name}的后验均值最高（${sortedPrices[0].mean}%），${sortedPrices[sortedPrices.length-1].name}最低（${sortedPrices[sortedPrices.length-1].mean}%）</li>
+        <li><strong>核心洞察：</strong>贝叶斯方法的优势在于可以量化不确定性——后验分布的宽度反映了我们"有多确定"。观测数据越多，分布越窄，预测越可靠。</li>
+    `;
+}
+
+// ============================================================
+// 初始化
+// ============================================================
+function initAllModules() {
+    initModule1();
+    initModule2();
+    initModule3();
+    initModule4();
+    initModule5();
+}
+
+// 响应窗口resize
+window.addEventListener('resize', () => {
+    document.querySelectorAll('.chart-container').forEach(el => {
+        const chart = echarts.getInstanceByDom(el);
+        if (chart) chart.resize();
+    });
+});
+
+loadData();
+</script>
+
+</body>
+</html>
