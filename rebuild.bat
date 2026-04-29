@@ -33,4 +33,4 @@ if errorlevel 1 (
 
 echo.
 echo === Done ===
-pause
+start "" index_standalone.html
