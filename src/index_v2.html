@@ -203,7 +203,7 @@
 <!-- Hero -->
 <div class="hero">
     <h1>🎮 Steam时代编年史</h1>
-    <p>拖动时间轴，穿越14年Steam游戏史，探索每一年的玩家偏好与经典之作</p>
+    <p id="heroSubtitle">拖动时间轴，穿越20年Steam游戏史，探索每一年的玩家偏好与经典之作</p>
 </div>
 
 <!-- 时间轴 -->
@@ -276,7 +276,7 @@
 
 <!-- 跨时间趋势 -->
 <div class="container">
-    <div class="section-title">📈 跨时间趋势：14年演变</div>
+    <div class="section-title" id="trendTitle">📈 跨时间趋势</div>
 
     <div class="grid-2">
         <div class="card">
@@ -476,7 +476,8 @@ function updateYearView(yd) {
     document.getElementById('yearTitle').textContent = yd.year;
     const eraNames = {2006:'Steam崛起',2007:'萌芽期',2008:'成长期',2009:'稳步发展',2010:'多元拓展',
         2011:'独立革命',2012:'独立崛起',2013:'早期-access浪潮',2014:'Steam Direct前夜',2015:'Steam Direct元年',
-        2016:'独立游戏爆发',2017:'市场成熟',2018:'精品化时代',2019:'新十年起点'};
+        2016:'独立游戏爆发',2017:'市场成熟',2018:'精品化时代',2019:'新十年起点',2020:'疫情浪潮',
+        2021:'后疫情调整',2022:'AI萌芽期',2023:'生成式AI元年',2024:'工具革命',2025:'AI深度融合'};
     document.getElementById('yearSubtitle').textContent = (eraNames[yd.year] || '') + ' · ' + p.top_tags.slice(0,3).join(' / ');
     document.getElementById('yearMeta').textContent = `该年上架 ${m.n_games.toLocaleString()} 款游戏 · ${m.total_reviews.toLocaleString()} 条评价`;
 
@@ -706,6 +707,11 @@ function initAlgoCard() {
 function init(cb) {
     initLangSwitch();
     initTimeline();
+    const span = yearMax - yearMin + 1;
+    document.getElementById('heroSubtitle').textContent =
+        `拖动时间轴，穿越${span}年Steam游戏史，探索每一年的玩家偏好与经典之作`;
+    document.getElementById('trendTitle').textContent =
+        `📈 跨时间趋势：${span}年演变`;
     setYear(yearMax);
     initTrends();
     updateSummaryTable();
