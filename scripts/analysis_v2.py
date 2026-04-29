@@ -460,10 +460,14 @@ output = {
     "year_range": [YEAR_MIN, YEAR_MAX],
 }
 
-with open("timeline_data.json", "w", encoding="utf-8") as f:
+import os
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT_PATH = os.path.join(ROOT, "data", "timeline_data.json")
+
+with open(OUT_PATH, "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2, cls=NumpyEncoder)
 
-print(f"\n完成! timeline_data.json ({len(json.dumps(output, ensure_ascii=False)) // 1024} KB)")
+print(f"\n完成! data/timeline_data.json ({len(json.dumps(output, ensure_ascii=False)) // 1024} KB)")
 print(f"年份范围: {YEAR_MIN}-{YEAR_MAX}")
 print(f"有效年份: {[y for y in all_years if yearly_data.get(str(y))]}")
 

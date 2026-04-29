@@ -1,10 +1,18 @@
-# 原始数据（太大不上传）
-steam_store_games.csv
+# 临时/校验产物
+tmp/
 
-# 临时/测试文件
-index_standalone_test.html
-embed_debug.py
-check_data.py
+# 原始数据（太大不上传）
+data/steam_store_games.csv
+
+# 旧版文件
+scripts/analysis.py
+scripts/embed_data.py
+scripts/embed_debug.py
+scripts/build_game_names.py
+scripts/build_game_names_v2.py
+scripts/build_game_names_v3.py
+data/game_names_old.json
+src/index.html
 
 # Python
 __pycache__/

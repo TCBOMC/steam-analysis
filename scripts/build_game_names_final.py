@@ -8,11 +8,15 @@ import pandas as pd
 import json
 import re
 import sys
+import os
 
 sys.stdout.reconfigure(encoding='utf-8')
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+
 # ============ 第一步：从外部 CSV 生成精确匹配索引 ============
-ext = pd.read_csv('game_names_merged.csv')
+ext = pd.read_csv(os.path.join(DATA_DIR, 'game_names_merged.csv'))
 
 def normalize(name):
     if pd.isna(name) or not str(name).strip():
@@ -357,9 +361,9 @@ else:
     print(f"MANUAL_NAMES: {len(MANUAL_NAMES)} entries, no duplicates")
 
 # ============ 第三步：合并 ============
-df = pd.read_csv('steam_store_games.csv')
+df = pd.read_csv(os.path.join(DATA_DIR, 'steam_store_games.csv'))
 
-with open('timeline_data.json', 'r', encoding='utf-8') as f:
+with open(os.path.join(DATA_DIR, 'timeline_data.json'), 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 displayed = {}
@@ -425,7 +429,8 @@ print(f'\n总计: {len(names)} 个游戏')
 print(f'  中文名: {total_cn}')
 print(f'  日文名: {total_jp}')
 
-with open('game_names.json', 'w', encoding='utf-8') as f:
+out_path = os.path.join(DATA_DIR, 'game_names.json')
+with open(out_path, 'w', encoding='utf-8') as f:
     json.dump(names, f, ensure_ascii=False, indent=2)
 sz = len(json.dumps(names, ensure_ascii=False))
-print(f'game_names.json: {sz // 1024} KB')
+print(f'data/game_names.json: {sz // 1024} KB')

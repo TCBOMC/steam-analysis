@@ -23,15 +23,22 @@ Steam 平台游戏数据的交互式可视化分析，覆盖 **2006–2025 年**
 ```
 steam-analysis/
 ├── index_standalone.html       # 单机版（所有数据内嵌，直接打开即用）
-├── index_v2.html               # 模板版（通过 embed_v2.py 注入数据生成单机版）
-├── timeline_data.json          # 分析结果数据
-├── game_names.json             # 247款游戏多语言翻译（中/日）
-├── analysis_v2.py              # 数据分析脚本
-├── build_game_names_final.py   # 游戏名翻译构建脚本（285条手动映射 + 外部数据）
-├── embed_v2.py                 # 数据注入脚本（JSON → HTML）
-├── data_module*.json           # 统计分析模块数据（描述统计/假设检验/相关性/方差分析/贝叶斯）
-├── explore.py                  # 数据探索脚本
-└── index.html                  # 旧版页面
+├── README.md
+├── scripts/                    # 构建脚本
+│   ├── analysis_v2.py          # 数据分析（生成 timeline_data.json）
+│   ├── build_game_names_final.py  # 游戏名翻译构建（285条手动映射 + 外部数据）
+│   ├── embed_v2.py             # 数据注入（JSON → 单机 HTML）
+│   ├── explore.py              # 数据探索
+│   └── fetch_names.py          # Steam API 名称预取
+├── data/                       # 数据文件
+│   ├── timeline_data.json      # 分析结果
+│   ├── game_names.json         # 247款游戏多语言翻译（中/日）
+│   ├── game_names_merged.csv   # 外部翻译合并数据
+│   ├── data_module*.json       # 统计模块数据（描述统计/假设检验/相关性/方差/贝叶斯）
+│   └── steam_store_games.csv   # 原始数据（.gitignore）
+├── src/                        # HTML 模板
+│   └── index_v2.html           # 主模板
+└── tmp/                        # 一次性校验产物（.gitignore）
 ```
 
 ## 数据源
@@ -44,15 +51,16 @@ steam-analysis/
 ```bash
 # 1. 下载数据集（需先 pip install kagglehub）
 python -c "import kagglehub; kagglehub.dataset_download('fronkongames/steam-games-dataset')"
+# 将下载的 games.json 转为 CSV 放入 data/steam_store_games.csv（或修改 analysis_v2.py 中的路径）
 
-# 2. 运行分析（需要修改 analysis_v2.py 中的 JSON 路径指向下载位置）
-python analysis_v2.py
+# 2. 运行分析
+python scripts/analysis_v2.py
 
 # 3. （可选）重新构建游戏名翻译
-python build_game_names_final.py
+python scripts/build_game_names_final.py
 
 # 4. 生成单机 HTML
-python embed_v2.py
+python scripts/embed_v2.py
 ```
 
 ## 技术栈

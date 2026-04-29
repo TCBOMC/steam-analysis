@@ -2,12 +2,14 @@
 import json
 import os
 
-os.chdir(r"c:\Users\TRSEIMC\WorkBuddy\20260428204258\steam-analysis")
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open("timeline_data.json", "r", encoding="utf-8") as f:
+os.chdir(ROOT)
+
+with open("data/timeline_data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-with open("index_v2.html", "r", encoding="utf-8") as f:
+with open("src/index_v2.html", "r", encoding="utf-8") as f:
     html = f.read()
 
 # 嵌入主数据
@@ -15,7 +17,7 @@ embed = '<script>\nconst EMBEDDED_DATA = ' + json.dumps(data, ensure_ascii=False
 
 # 嵌入翻译名称（如果存在）
 names_embed = ''
-names_path = "game_names.json"
+names_path = os.path.join("data", "game_names.json")
 if os.path.exists(names_path):
     with open(names_path, "r", encoding="utf-8") as f:
         names = json.load(f)
