@@ -4,7 +4,11 @@ Steam 平台游戏数据的交互式可视化分析，覆盖 **2006–2025 年**
 
 ## 在线预览
 
-直接打开 `index_standalone.html` 即可在浏览器中查看完整交互界面。
+👉 **[Steam 时代编年史](https://tcbomc.github.io/steam-analysis/)** — GitHub Pages 自动部署
+
+也可直接打开仓库中的 `index_standalone.html` 离线查看。
+
+<img width="3765" height="6592" alt="Screenshot 2026-04-30 at 04-59-55 Steam时代编年史：玩家偏好的演变" src="https://github.com/user-attachments/assets/e7559653-216c-4d03-9aa6-fcfe60a559ce" />
 
 <img width="3765" height="6592" alt="Screenshot 2026-04-30 at 04-59-55 Steam时代编年史：玩家偏好的演变" src="https://github.com/user-attachments/assets/e7559653-216c-4d03-9aa6-fcfe60a559ce" />
 
