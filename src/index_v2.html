@@ -477,7 +477,7 @@ function updateYearView(yd) {
     const eraNames = {2006:'Steam崛起',2007:'萌芽期',2008:'成长期',2009:'稳步发展',2010:'多元拓展',
         2011:'独立革命',2012:'独立崛起',2013:'Early Access浪潮',2014:'Steam Direct前夜',2015:'Steam Direct元年',
         2016:'独立游戏爆发',2017:'市场成熟',2018:'精品化时代',2019:'新十年起点',2020:'疫情居家潮',
-        2021:'后疫情分化',2022:'价格攀升期',2023:'市场回暖',2024:'全面繁荣',2025:'进行中'};
+        2021:'后疫情分化',2022:'价格攀升期',2023:'市场回暖',2024:'全面繁荣',2025:'高价精品化'};
     document.getElementById('yearSubtitle').textContent = (eraNames[yd.year] || '') + ' · ' + p.top_tags.slice(0,3).join(' / ');
     document.getElementById('yearMeta').textContent = `该年上架 ${m.n_games.toLocaleString()} 款游戏 · ${m.total_reviews.toLocaleString()} 条评价`;
 
