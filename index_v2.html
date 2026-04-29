@@ -166,6 +166,21 @@
         /* footer */
         .footer { text-align: center; padding: 32px 24px; color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); }
 
+        /* 语言切换 */
+        .lang-switch {
+            position: fixed; top: 16px; right: 24px; z-index: 999;
+            display: flex; gap: 4px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px; padding: 3px; font-size: 13px;
+        }
+        .lang-btn {
+            padding: 4px 12px; border-radius: 6px; border: none; cursor: pointer;
+            background: transparent; color: var(--text-dim); font-size: 13px; transition: all 0.15s;
+        }
+        .lang-btn:hover { color: var(--text-bright); background: rgba(102,192,244,0.08); }
+        .lang-btn.active { background: var(--accent); color: #0d1117; font-weight: 700; }
+        .lang-loading { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; margin-left: 6px; vertical-align: middle; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         @media (max-width: 900px) {
             .grid-2, .grid-3-1 { grid-template-columns: 1fr; }
             .hero h1 { font-size: 24px; }
@@ -177,6 +192,13 @@
     </style>
 </head>
 <body>
+
+<!-- 语言切换 -->
+<div class="lang-switch" id="langSwitch">
+    <button class="lang-btn" data-lang="english">EN</button>
+    <button class="lang-btn active" data-lang="schinese">中文</button>
+    <button class="lang-btn" data-lang="japanese">日文</button>
+</div>
 
 <!-- Hero -->
 <div class="hero">
@@ -300,6 +322,65 @@
 const DATA = {};
 let currentYear = 2015;
 let yearMin, yearMax;
+let currentLang = 'schinese';
+
+// ============================================================
+// 多语言名称：从预构建的翻译数据中读取
+// ============================================================
+const gameNames = (typeof GAME_NAMES !== 'undefined') ? GAME_NAMES : {};
+
+function getLocalName(appid, enName, lang) {
+    if (lang === 'english' || !appid) return enName;
+    const entry = gameNames[String(appid)];
+    if (entry && entry[lang]) return entry[lang];
+    return enName;  // 无翻译则回退英文
+}
+
+// 从结论文本中提取英文名并替换为当前语言版本
+function localizeConclusion(text) {
+    if (currentLang === 'english') return text;
+    const yd = DATA.yearly[String(currentYear)];
+    if (!yd) return text;
+    // 匹配 "综合推荐TOP1：GameName（..." 模式
+    return text.replace(/(综合推荐TOP1[：:]\s*)(.+?)(（)/, (match, prefix, enName, suffix) => {
+        const game = (yd.top5 || []).find(g => g.name === enName);
+        if (game && game.appid) {
+            return prefix + getLocalName(game.appid, enName, currentLang) + suffix;
+        }
+        return match;
+    });
+}
+
+// 收集当前年份所有需要翻译的 appid（保留用于未来扩展）
+function collectAppids(yd) {
+    const ids = new Set();
+    (yd.top5 || []).forEach(g => { if (g.appid) ids.add(g.appid); });
+    (yd.best_by_genre || []).forEach(g => { if (g.appid) ids.add(g.appid); });
+    return Array.from(ids);
+}
+
+// 切换语言（纯前端，无需网络请求）
+function switchLang(lang) {
+    if (lang === currentLang) return;
+    currentLang = lang;
+
+    // 更新按钮状态
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+    });
+
+    // 直接刷新当前视图
+    const yd = DATA.yearly[String(currentYear)];
+    if (yd) updateYearView(yd);
+    updateSummaryTable();
+}
+
+// 初始化语言切换
+function initLangSwitch() {
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+    });
+}
 
 function loadData(cb) {
     // 尝试从内嵌数据加载
@@ -419,7 +500,7 @@ function updateYearView(yd) {
     // 词云
     const wc = mc('chartWordcloud');
     wc.setOption({
-        tooltip: { show: true },
+        tooltip: { show: true, formatter: function(p) { return `<b>${p.name}</b><br/>出现次数：${p.data.count}`; } },
         series: [{
             type: 'wordCloud',
             shape: 'circle',
@@ -435,7 +516,7 @@ function updateYearView(yd) {
                 color: function () { return 'hsl(' + Math.round(Math.random()*60 + 190) + ',70%,65%)'; }
             },
             emphasis: { textStyle: { shadowBlur: 10, shadowColor: 'rgba(102,192,244,0.5)', color: '#fff' } },
-            data: yd.wordcloud.map(w => ({ name: w.word, value: w.value })),
+            data: yd.wordcloud.map(w => ({ name: w.word, value: w.value, count: w.count || 0 })),
         }]
     });
 
@@ -475,7 +556,7 @@ function updateYearView(yd) {
     document.getElementById('top5List').innerHTML = yd.top5.map((g,i) => `
         <li class="rank-item">
             <div class="rank-num ${rankColors[i]}">${i+1}</div>
-            <div><span class="rank-name">${g.name}</span><span class="rank-genre">${g.genre}</span></div>
+            <div><span class="rank-name">${getLocalName(g.appid, g.name, currentLang)}</span><span class="rank-genre">${g.genre}</span></div>
             <div class="rank-score">${g.score}</div>
             <div class="rank-ratio">${g.positive_ratio}%</div>
             <div class="rank-price">$${g.price}</div>
@@ -486,13 +567,16 @@ function updateYearView(yd) {
     document.getElementById('bestByGenre').innerHTML = yd.best_by_genre.slice(0, 10).map(g => `
         <div class="genre-best-item">
             <span class="gb-genre">${g.genre}</span>
-            <span class="gb-name">${g.name}</span>
+            <span class="gb-name">${getLocalName(g.appid, g.name, currentLang)}</span>
             <span class="gb-score">${g.score}</span>
         </div>
     `).join('');
 
-    // 结论
-    document.getElementById('conclusionList').innerHTML = yd.conclusions.map(c => `<li>${c}</li>`).join('');
+    // 结论（游戏名跟随语言）
+    document.getElementById('conclusionList').innerHTML = yd.conclusions.map(c => {
+        c = localizeConclusion(c);
+        return `<li>${c}</li>`;
+    }).join('');
 
     // 动画
     document.getElementById('yearHeader').style.animation = 'none';
@@ -570,7 +654,7 @@ function initTrends() {
 // ============================================================
 // 附录
 // ============================================================
-function initAppendix() {
+function updateSummaryTable() {
     // 汇总表
     const s = DATA.yearly_summary;
     let html = '<table class="data-table"><thead><tr>';
@@ -585,6 +669,7 @@ function initAppendix() {
         html += '<tr>';
         cols.forEach(c => {
             let v = r[c[0]];
+            if (c[0]==='top1_game' && r.top1_appid) v = getLocalName(r.top1_appid, v, currentLang);
             if (c[0]==='median_positive_ratio') v += '%';
             if (c[0]==='avg_playtime') v += 'h';
             if (c[0]==='median_price') v = '$'+v;
@@ -594,7 +679,9 @@ function initAppendix() {
     });
     html += '</tbody></table>';
     document.getElementById('summaryTable').innerHTML = html;
+}
 
+function initAlgoCard() {
     // 算法说明
     const a = DATA.algorithm;
     document.getElementById('algoCard').innerHTML = `
@@ -617,10 +704,12 @@ function initAppendix() {
 // 初始化
 // ============================================================
 function init(cb) {
+    initLangSwitch();
     initTimeline();
-    setYear(2015);
+    setYear(yearMax);
     initTrends();
-    initAppendix();
+    updateSummaryTable();
+    initAlgoCard();
     if (cb) cb();
 }
 

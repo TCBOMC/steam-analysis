@@ -1,0 +1,248 @@
+﻿appid,en_name,zh_name,ja_name,match_method
+400,"Portal","传送门","",exact
+420,"Half-Life 2: Episode Two","","","none"
+440,"Team Fortress 2","军团要塞2","",exact
+500,"Left 4 Dead","求生之路","",exact
+550,"Left 4 Dead 2","求生之路2","",exact
+570,"Dota 2","","","none"
+620,"Portal 2","传送门2","",exact
+659,"Portal 2","传送门2","",exact
+730,"Counter-Strike 2","反恐精英2","",exact
+2990,"FlatOut 2","横冲直撞2","",exact
+3480,"Peggle Deluxe","","","none"
+3540,"Peggle™ Nights","幻幻球之夜","",exact
+3590,"Plants vs. Zombies GOTY Edition","植物大战僵尸","",fuzzy (plants vs. zombies)
+3830,"Psychonauts","脑航员","",exact
+4000,"Garry's Mod","盖瑞模组","",exact
+4700,"Total War: MEDIEVAL II – Definitive Edition","","","none"
+4760,"Rome: Total War™ - Collection","","","none"
+7200,"Trackmania United Forever","赛道狂飙：联合永恒","",exact
+8500,"EVE Online","星战前夜：晨曦","",exact
+8790,"GTR 2 FIA GT Racing Game","","","none"
+8930,"Sid Meier's Civilization® V","","","none"
+9010,"Return to Castle Wolfenstein","重返德军总部","",exact
+9420,"Supreme Commander: Forged Alliance","最高指挥官","",fuzzy (supreme commander)
+9450,"Warhammer® 40,000: Dawn of War® - Soulstorm","","","none"
+10090,"Call of Duty: World at War","使命召唤：战火世界","",exact
+10190,"Call of Duty®: Modern Warfare® 2 (2009)","使命召唤","",fuzzy (call of duty)
+10500,"Total War: EMPIRE – Definitive Edition","","","none"
+11450,"Overlord™","霸王","",exact
+12900,"AudioSurf","音乐战机","",exact
+15210,"Silent Hunter® III","","","none"
+15710,"Oddworld: Abe's Exoddus®","","","none"
+17390,"SPORE™","孢子","",exact
+20900,"The Witcher: Enhanced Edition Director's Cut","","","none"
+20920,"The Witcher 2: Assassins of Kings Enhanced Edition","","","none"
+22330,"The Elder Scrolls IV: Oblivion® Game of the Year Edition (2009)","","","none"
+22380,"Fallout: New Vegas","辐射 新维加斯","",exact
+25990,"Majesty Gold HD","","","none"
+32150,"Everyday Genius: SquareLogic","逻辑方块","",exact
+32370,"STAR WARS™ Knights of the Old Republic™","","","none"
+33930,"Arma 2: Operation Arrowhead","武装突袭2","",fuzzy (arma 2)
+34900,"Bad Rats: the Rats' Revenge","","","none"
+39000,"Moonbase Alpha","","","none"
+39140,"FINAL FANTASY VII","最终幻想7","",exact
+39680,"The Guild II Renaissance","","","none"
+40800,"Super Meat Boy","超级肉肉哥","",exact
+46500,"Syberia","赛伯利亚之谜","",exact
+47810,"Dragon Age: Origins - Ultimate Edition","","","none"
+48700,"Mount & Blade: Warband","骑马与砍杀：战团","",exact
+49520,"Borderlands 2","无主之地2","",exact
+52003,"Portal","传送门","",exact
+55230,"Saints Row: The Third","黑道圣徒3","",exact
+57690,"Tropico 4","海岛大亨4","",exact
+72850,"The Elder Scrolls V: Skyrim","上古卷轴5：天际","",exact
+78000,"Bejeweled® 3","宝石迷阵3","",exact
+98800,"Dungeons of Dredmor","地下城冒险","",exact
+105600,"Terraria","泰拉瑞亚","",exact
+107310,"Cthulhu Saves the World","邪神拯救世界","",exact
+108600,"Project Zomboid","僵尸毁灭工程","",exact
+200010,"Quantum Conundrum","量子谜题","",exact
+200510,"XCOM: Enemy Unknown","幽浮：未知敌人","",exact
+204360,"Castle Crashers®","城堡毁灭者","",exact
+205100,"Dishonored","耻辱","",exact
+206440,"To the Moon","去月球","",exact
+217200,"Worms Armageddon","","","none"
+218620,"PAYDAY 2","收获日2","",exact
+219740,"Don't Starve","饥荒","",exact
+219990,"Grim Dawn","恐怖黎明","",exact
+227300,"Euro Truck Simulator 2","欧洲卡车模拟2","",exact
+228200,"Company of Heroes","英雄连","",exact
+230410,"Warframe","星际战甲","",exact
+232910,"TrackMania² Stadium","","","none"
+236850,"Europa Universalis IV","欧陆风云4","",exact
+238960,"Path of Exile","流放之路","",exact
+239820,"Game Dev Tycoon","游戏发展国","",exact
+242760,"The Forest","森林","",exact
+244210,"Assetto Corsa","神力科莎","",exact
+246420,"Kingdom Rush  - Tower Defense","王国保卫战","",fuzzy (kingdom rush)
+246620,"Plague Inc: Evolved","","","none"
+252490,"Rust","腐蚀","",exact
+252950,"Rocket League®","火箭联盟","",exact
+255710,"Cities: Skylines","城市：天际线","",exact
+256290,"Child of Light","光之子","",exact
+271590,"Grand Theft Auto V Legacy","","","none"
+272040,"KAMI","神折纸","",exact
+282070,"This War of Mine","这是我的战争","",exact
+284160,"BeamNG.drive","","","none"
+285330,"RollerCoaster Tycoon® 2: Triple Thrill Pack","","","none"
+286690,"Metro 2033 Redux","","","none"
+287310,"Re-Volt","玩具遥控汽车","",exact
+289070,"Sid Meier’s Civilization® VI","","","none"
+292030,"The Witcher 3: Wild Hunt","巫师3：狂猎","",exact
+292410,"Street Racing Syndicate","","","none"
+296770,"Real Boxing™","真实拳击","",exact
+304930,"Unturned","未转变者","",exact
+305260,"Battle Islands","岛屿之战","",exact
+307690,"Sleeping Dogs: Definitive Edition","热血无赖：终极版","",exact
+322170,"Geometry Dash","几何冲刺","",exact
+322330,"Don't Starve Together","饥荒 联机版","",exact
+323190,"Frostpunk","冰汽时代","",exact
+324680,"Impossible Creatures Steam Edition","不可思议的生物","",fuzzy (impossible creatures)
+346010,"Besiege","围攻","",exact
+359550,"Tom Clancy's Rainbow Six® Siege X","","","none"
+365670,"Blender","","","none"
+367670,"Controller Companion","","","none"
+372000,"Tree of Savior (English Ver.)","","","none"
+375950,"Viridi","肉肉","",exact
+381210,"Dead by Daylight","黎明杀机","",exact
+387840,"Alpha Runner","","","none"
+391540,"Undertale","地下传说","",exact
+394360,"Hearts of Iron IV","钢铁雄心4","",exact
+400040,"ShareX","","","none"
+413150,"Stardew Valley","星露谷物语","",exact
+415200,"Motorsport Manager","赛车经理","",exact
+431240,"Golf With Your Friends","和朋友打高尔夫","",exact
+431730,"Aseprite","","","none"
+431960,"Wallpaper Engine","Wallpaper Engine：壁纸引擎","",exact
+438660,"Jerry Rice & Nitus' Dog Football","","","none"
+446830,"The Lonesome Fog","","","none"
+450390,"The Lab","","","none"
+489830,"The Elder Scrolls V: Skyrim Special Edition","上古卷轴5：天际 特别版","",exact
+508440,"Totally Accurate Battle Simulator","全面战争模拟器","",exact
+516750,"My Summer Car","我的夏季汽车","",exact
+517910,"Sisyphus Reborn","","","none"
+518790,"theHunter: Call of the Wild™","","","none"
+545110,"Driver Booster 4 for Steam","","","none"
+554310,"Rage Wars","","","none"
+559210,"Rakuen","","","none"
+559680,"Vampire: The Masquerade - Redemption","","","none"
+578080,"PUBG: BATTLEGROUNDS","","","none"
+588430,"Fallout Shelter","辐射 避难所","",exact
+601510,"Yu-Gi-Oh! Duel Links","游戏王 决斗链接","",exact
+613100,"House Flipper","房产达人","",exact
+616720,"Live2DViewerEX","","","none"
+632470,"Disco Elysium - The Final Cut","极乐迪斯科","",fuzzy (disco elysium)
+635260,"CarX Drift Racing Online","","","none"
+645630,"Car Mechanic Simulator 2018","汽车修理工模拟2018","",exact
+646570,"Slay the Spire","尖塔奇兵","",exact
+647960,"Rusted Warfare - RTS","铁锈战争","",fuzzy (rusted warfare)
+657200,"Hand Simulator","","","none"
+665300,"Stream Avatars","","","none"
+674940,"Stick Fight: The Game","火柴人战斗","",exact
+683320,"GRIS","","","none"
+687850,"Head Goal: Soccer Online","","","none"
+698780,"Doki Doki Literature Club!","","","none"
+701380,"El Tango de la Muerte","","","none"
+703080,"Planet Zoo","动物园之星","",exact
+738060,"Freddy Fazbear's Pizzeria Simulator","玩具熊的披萨店模拟","",exact
+753360,"VoiceActress","","","none"
+755540,"LIV","","","none"
+778700,"Amorous","","","none"
+785480,"Titanic: Adventure Out Of Time","泰坦尼克","",exact
+786520,"SAO Utils: Beta","","","none"
+792050,"Beneath The Surface","","","none"
+798290,"MXGP PRO","","","none"
+819230,"Gothicc Breaker","","","none"
+843260,"The Bard's Tale Trilogy","冰城传奇三部曲","",exact
+843660,"Rogue Agent","","","none"
+870820,"Wakaru ver. beta","","","none"
+892970,"Valheim","英灵神殿","",exact
+945360,"Among Us","在我们之中","",exact
+960090,"Bloons TD 6","气球塔防6","",exact
+972660,"Spiritfarer®: Farewell Edition","灵魂旅人","",fuzzy (spiritfarer)
+990080,"Hogwarts Legacy","霍格沃茨之遗","",exact
+1009850,"OVR Advanced Settings","","","none"
+1011510,"Wizard And Minion Idle","","","none"
+1028630,"Cricket 19","板球19","",exact
+1041320,"Lords Mobile: Kingdom Wars","王国纪元","",fuzzy (lords mobile)
+1055010,"Energy Engine PC Live Wallpaper","","","none"
+1085510,"Garfield Kart - Furious Racing","加菲猫卡丁车：激情竞速","",exact
+1085660,"Destiny 2","命运2","",exact
+1086940,"Baldur's Gate 3","博德之门3","",exact
+1091500,"Cyberpunk 2077","赛博朋克2077","",exact
+1100600,"Football Manager 2020","足球经理2020","",exact
+1118200,"People Playground","","","none"
+1118310,"RetroArch","","","none"
+1127400,"Mindustry","","","none"
+1147690,"NGU IDLE","","","none"
+1161490,"MotoGP™20","","","none"
+1172310,"Mona Lisa: Beyond The Glass","","","none"
+1172470,"Apex Legends™","Apex英雄","",exact
+1190000,"Car Mechanic Simulator 2021","汽车修理工模拟2021","",exact
+1204050,"Pixel Studio - pixel art editor","","","none"
+1210320,"Potion Craft: Alchemist Simulator","药剂工艺：炼金术士模拟器","",exact
+1213210,"Command & Conquer™ Remastered Collection","命令与征服 高清重制合集","",exact
+1222140,"Detroit: Become Human","底特律：化身为人","",exact
+1237970,"Titanfall® 2","泰坦天降2","",exact
+1244800,"Terraformers","焕然异星","",exact
+1245620,"ELDEN RING","艾尔登法环","",exact
+1263850,"Football Manager 2021","足球经理2021","",exact
+1283970,"YoloMouse - Game Cursor Changer","","","none"
+1286830,"STAR WARS™: The Old Republic™","星球大战：旧共和国","",exact
+1292940,"Cube Escape Collection","逃脱方块","",fuzzy (cube escape)
+1326470,"Sons Of The Forest","森林之子","",exact
+1337970,"CatTuber","","","none"
+1366800,"Crosshair X","","","none"
+1374480,"爱人 Lover","","","none"
+1424330,"Wobbledogs","摇摆狗狗","",exact
+1454400,"Cookie Clicker","饼干点点乐","",exact
+1466860,"Age of Empires IV: Anniversary Edition","","","none"
+1480140,"RPG Sounds","","","none"
+1486350,"VRoid Studio v2.7.0","","","none"
+1491670,"Venba","","","none"
+1545560,"Shadow Gambit: The Cursed Crew","影子诡局：被诅咒的海盗","",exact
+1546570,"Sword and Fairy","","","none"
+1569040,"Football Manager 2022","足球经理2022","",exact
+1599340,"Lost Ark","命运方舟","",exact
+1605010,"Adorable Witch","","","none"
+1623730,"Palworld","幻兽帕鲁","パルワールド",exact
+1625080,"Have a Nice Dream","","","none"
+1637370,"Letters From a Rainy Day -Oceans and Lace-","","","none"
+1650010,"RIDE 5","极速骑行5","",exact
+1669980,"Volcano Princess","火山的女儿","",exact
+1687950,"Persona 5 Royal","女神异闻录5 皇家版","",exact
+1708150,"Juice Galaxy","","","none"
+1775490,"Slice & Dice","","","none"
+1787090,"MyDockFinder","","","none"
+1794680,"Vampire Survivors","吸血鬼幸存者","",exact
+1844610,"Reality Mixer - Mixed Reality for VR headsets","","","none"
+1849570,"Love Stories: When Pastel Meets Grotesque","","","none"
+1893620,"Circadian Dice","","","none"
+1901340,"Ero Manager","","","none"
+1904540,"Football Manager 2023","足球经理2023","",exact
+1934680,"Age of Mythology: Retold","","","none"
+1938090,"Call of Duty®","使命召唤","",exact
+1943950,"Escape the Backrooms","逃离后室","",exact
+1966720,"Lethal Company","致命公司","",exact
+2073470,"Kanjozoku Game レーサー Online Street Racing & Drift","","","none"
+2078450,"Warhammer 40,000: Speed Freeks","","","none"
+2128270,"Path of Achra","","","none"
+2142790,"Fields of Mistria","","","none"
+2252570,"Football Manager 2024","足球经理2024","",exact
+2358720,"Black Myth: Wukong","","","none"
+2386460,"Tree It","","","none"
+2395210,"Tony Hawk's™ Pro Skater™ 1 + 2","托尼·霍克职业滑板1+2","",exact
+2427700,"Backpack Battles","背包乱斗：福西法的宝藏","",exact
+2536840,"GINKA","","","none"
+2593370,"The Hungry Lamb: Traveling in the Late Ming Dynasty","","","none"
+2660460,"Aviassembly","","","none"
+2670630,"Supermarket Simulator","","","none"
+2707900,"NIGHT-RUNNERS™ PROLOGUE","","","none"
+2784470,"9 Kings","","","none"
+2881650,"Content Warning","内容警告","",exact
+3029820,"Ai Vpet","","","none"
+3070070,"TCG Card Shop Simulator","","","none"
+3164500,"Schedule I","","","none"
+3241660,"R.E.P.O.","","","none"
+3449850,"Desktop Kitten Girl","","","none"

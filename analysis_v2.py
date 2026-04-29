@@ -8,8 +8,54 @@ import numpy as np
 from scipy import stats
 from collections import Counter
 import json
+import re
 import warnings
 warnings.filterwarnings('ignore')
+
+
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+
+# 游戏专用停用词（通用列表不覆盖的领域高频词）
+GAME_STOP_WORDS = {
+    # 通用游戏词
+    "game", "games", "gameplay", "play", "playing", "player", "players",
+    "steam", "action", "adventure", "features", "feature", "include",
+    "includes", "including", "experience", "control", "controls", "level",
+    "levels", "based", "version", "available", "supports", "yourself",
+    "system", "mode", "person", "become", "becomes",
+    # 营销套话 / 文本高频填充词（无区分度）
+    "unique", "original", "classic", "realistic", "story", "stories",
+    "new", "world", "time", "like", "fun", "key", "explore", "enemies",
+    "life", "war", "different", "way", "make", "use", "just", "characters",
+    "battle", "take", "find", "set", "need", "best", "real", "full",
+    "various", "help", "after", "while", "turn", "choose", "put", "get",
+    "go", "going", "come", "many", "much", "well", "back", "still",
+    "even", "now", "long", "great", "little", "own", "got", "made",
+    "around", "across", "through", "things", "something", "everything",
+    "anything", "nothing", "thing", "know", "think", "good", "want",
+    "give", "day", "days", "look", "looking", "see", "work", "works",
+    "keep", "start", "started", "right", "left", "high", "low", "big",
+    "small", "old", "young", "man", "men", "people", "place", "places",
+    "part", "parts", "hand", "hands", "point", "points", "build",
+    "builds", "building", "run", "running", "try", "tried", "trying",
+    # 游戏描述万能填充词（无区分度）
+    "combat", "friends", "character", "fight", "items", "powerful", "weapons", "unlock",
+
+}
+
+ALL_STOP = set(ENGLISH_STOP_WORDS) | GAME_STOP_WORDS
+
+
+def extract_words(text, min_len=3):
+    """从英文文本中提取关键词（去除停用词、HTML标签、短词）"""
+    if not text or not isinstance(text, str) or len(text) < 10:
+        return []
+    # 去除 HTML 标签
+    text = re.sub(r'<[^>]+>', ' ', text)
+    # 只保留字母和空格
+    text = re.sub(r'[^a-zA-Z\s]', ' ', text)
+    words = text.lower().split()
+    return [w for w in words if w not in ALL_STOP and len(w) >= min_len]
 
 
 class NumpyEncoder(json.JSONEncoder):
@@ -122,17 +168,64 @@ for year in all_years:
         if len(grp) >= 5:
             price_ratings[label] = round(float(grp.mean()) * 100, 1)
 
-    # ---- 词云数据（tags 字典：tag -> vote_count） ----
-    tag_counter = Counter()
+    # ---- 词云数据：标签 + 简介关键词 + 评测关键词 ----
+    tag_counter = Counter()   # Steam 标签（原始投票权重）
+    text_counter = Counter()  # 文本关键词（来自描述/评测）
+
+    # 标签
     for tags_dict in dy["tags"].dropna():
         if isinstance(tags_dict, dict):
             for tag, w in tags_dict.items():
                 tag = tag.strip()
                 if tag and len(tag) >= 2:
-                    tag_counter[tag] += int(w)  # 用投票数作为权重
-    # 取top80
-    top_tags = tag_counter.most_common(80)
-    wordcloud_data = [{"word": t, "value": c} for t, c in top_tags]
+                    tag_counter[tag] += int(w)
+
+    # 文本关键词：合并 short_description + about_the_game + reviews
+    for text in dy["short_description"].dropna():
+        for w in extract_words(text):
+            text_counter[w] += 2  # 简介词权重 ×2
+    for text in dy["about_the_game"].dropna():
+        for w in extract_words(text):
+            text_counter[w] += 1
+    for text in dy["reviews"].dropna():
+        for w in extract_words(text):
+            text_counter[w] += 3  # 评测词权重 ×3
+
+    # 归一化合并：标签和文本各自取 TOP80，然后分别归一化到 [0, 100] 再合并
+    # 这样标签的投票数和文本的出现次数不会互相压制
+    top_tags_raw = tag_counter.most_common(80)
+    top_text_raw = text_counter.most_common(80)
+
+    def normalize(counter_raw):
+        if not counter_raw:
+            return []
+        max_val = max(v for _, v in counter_raw)
+        if max_val == 0:
+            return [(w, 0) for w, _ in counter_raw]
+        return [(w, round(v / max_val * 100)) for w, v in counter_raw]
+
+    norm_tags = normalize(top_tags_raw)
+    norm_text = normalize(top_text_raw)
+
+    # 合并：标签词 ×0.5 + 文本词 ×1.0（文本词权重更高，更有参考价值）
+    merged = Counter()
+    for w, v in norm_tags:
+        merged[w] += v * 0.5
+    for w, v in norm_text:
+        # 如果该词已经是标签词，额外加成（标签+文本同时出现说明特别重要）
+        if w in dict(norm_tags):
+            merged[w] += v * 0.5  # 标签已有 0.5，再加 0.5 使其在合并后总权重 = 1.0
+        else:
+            merged[w] += v * 1.0
+
+    top_tags = merged.most_common(80)
+    # 构建原始计数映射（标签 + 文本合并）
+    raw_counts = Counter()
+    for w, v in top_tags_raw:
+        raw_counts[w] += v
+    for w, v in top_text_raw:
+        raw_counts[w] += v
+    wordcloud_data = [{"word": t, "value": round(c), "count": raw_counts[t]} for t, c in top_tags]
 
     # ---- 游玩时长分布 ----
     playtime_bins = [0, 1, 5, 20, 50, 200]
@@ -175,11 +268,12 @@ for year in all_years:
     dy["score"] = dy.apply(lambda r: compute_score(r, yearly_data), axis=1)
 
     # TOP 5 综合
-    top5 = dy.nlargest(5, "score")[["name", "main_genre", "price", "positive_ratio", "total_reviews", "average_playtime", "score"]].reset_index(drop=True)
+    top5 = dy.nlargest(5, "score")[["appid", "name", "main_genre", "price", "positive_ratio", "total_reviews", "average_playtime", "score"]].reset_index(drop=True)
     top5_list = []
     for _, r in top5.iterrows():
         top5_list.append({
             "rank": int(len(top5_list)) + 1,
+            "appid": int(r["appid"]),
             "name": r["name"],
             "genre": r["main_genre"],
             "price": round(float(r["price"]), 2),
@@ -197,6 +291,7 @@ for year in all_years:
         grp = dy[dy["main_genre"] == g]
         best = grp.loc[grp["score"].idxmax()]
         best_by_genre.append({
+            "appid": int(best["appid"]),
             "genre": g,
             "name": best["name"],
             "score": round(float(best["score"]), 1),
@@ -337,6 +432,7 @@ for y in all_years:
         "trend": p["trend"],
         "top1_game": yd["top5"][0]["name"] if yd["top5"] else "",
         "top1_score": yd["top5"][0]["score"] if yd["top5"] else 0,
+        "top1_appid": yd["top5"][0]["appid"] if yd["top5"] else 0,
     })
 
 # 算法说明

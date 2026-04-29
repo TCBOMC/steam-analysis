@@ -1,0 +1,247 @@
+400|Portal|传送门|
+420|Half-Life 2: Episode Two|半条命 2：第二章|Half-Life 2: Episode Two
+440|Team Fortress 2|军团要塞2|
+500|Left 4 Dead|求生之路|
+550|Left 4 Dead 2|求生之路2|
+570|Dota 2|刀塔 2|Dota 2
+620|Portal 2|传送门2|
+659|Portal 2|传送门2|
+730|Counter-Strike 2|反恐精英2|
+2990|FlatOut 2|横冲直撞2|
+3480|Peggle Deluxe|幻幻球 豪华版|Peggle Deluxe
+3540|Peggle™ Nights|幻幻球之夜|
+3590|Plants vs. Zombies GOTY Edition|植物大战僵尸|
+3830|Psychonauts|脑航员|
+4000|Garry's Mod|盖瑞模组|
+4700|Total War: MEDIEVAL II – Definitive Edition|全面战争：中世纪 2 终极版|Total War: MEDIEVAL II
+4760|Rome: Total War™ - Collection|罗马：全面战争 合集|Rome: Total War
+7200|Trackmania United Forever|赛道狂飙：联合永恒|
+8500|EVE Online|星战前夜：晨曦|
+8790|GTR 2 FIA GT Racing Game|GTR 2 FIA GT Racing Game|GTR 2 FIA GT Racing Game
+8930|Sid Meier's Civilization® V|文明 5|Civilization V
+9010|Return to Castle Wolfenstein|重返德军总部|
+9420|Supreme Commander: Forged Alliance|最高指挥官|
+9450|Warhammer® 40,000: Dawn of War® - Soulstorm|战锤 40000：战争黎明 灵魂风暴|Warhammer 40,000: Dawn of War - Soulstorm
+10090|Call of Duty: World at War|使命召唤：战火世界|
+10190|Call of Duty®: Modern Warfare® 2 (2009)|使命召唤|
+10500|Total War: EMPIRE – Definitive Edition|全面战争：帝国 终极版|Total War: EMPIRE
+11450|Overlord™|霸王|
+12900|AudioSurf|音乐战机|
+15210|Silent Hunter® III|猎杀潜航 3|Silent Hunter III
+15710|Oddworld: Abe's Exoddus®|奇异世界：阿比逃亡记 2|Oddworld: Abe's Exoddus
+17390|SPORE™|孢子|
+20900|The Witcher: Enhanced Edition Director's Cut|巫师：强化版导演剪辑版|The Witcher: Enhanced Edition Director's Cut
+20920|The Witcher 2: Assassins of Kings Enhanced Edition|巫师 2：国王刺客加强版|The Witcher 2: Assassins of Kings Enhanced Edition
+22330|The Elder Scrolls IV: Oblivion® Game of the Year Edition (2009)|上古卷轴4：湮没年度版|
+22380|Fallout: New Vegas|辐射 新维加斯|
+25990|Majesty Gold HD| Majesty Gold HD|Majesty Gold HD
+32150|Everyday Genius: SquareLogic|逻辑方块|
+32370|STAR WARS™ Knights of the Old Republic™|星球大战：旧共和国武士|STAR WARS Knights of the Old Republic
+33930|Arma 2: Operation Arrowhead|武装突袭2|
+34900|Bad Rats: the Rats' Revenge|坏老鼠|Bad Rats
+39000|Moonbase Alpha|月球基地 Alpha|Moonbase Alpha
+39140|FINAL FANTASY VII|最终幻想7|
+39680|The Guild II Renaissance|行会 2 文艺复兴|The Guild II Renaissance
+40800|Super Meat Boy|超级肉肉哥|
+46500|Syberia|赛伯利亚之谜|
+47810|Dragon Age: Origins - Ultimate Edition|龙腾世纪：起源|Dragon Age: Origins
+48700|Mount & Blade: Warband|骑马与砍杀：战团|
+49520|Borderlands 2|无主之地2|
+52003|Portal|传送门|
+55230|Saints Row: The Third|黑道圣徒3|
+57690|Tropico 4|海岛大亨4|
+72850|The Elder Scrolls V: Skyrim|上古卷轴5：天际|
+78000|Bejeweled® 3|宝石迷阵3|
+98800|Dungeons of Dredmor|地下城冒险|
+105600|Terraria|泰拉瑞亚|
+107310|Cthulhu Saves the World|邪神拯救世界|
+108600|Project Zomboid|僵尸毁灭工程|
+200010|Quantum Conundrum|量子谜题|
+200510|XCOM: Enemy Unknown|幽浮：未知敌人|
+204360|Castle Crashers®|城堡毁灭者|
+205100|Dishonored|耻辱|
+206440|To the Moon|去月球|
+217200|Worms Armageddon|百战天虫：末日浩劫|Worms Armageddon
+218620|PAYDAY 2|收获日2|
+219740|Don't Starve|饥荒|
+219990|Grim Dawn|恐怖黎明|
+227300|Euro Truck Simulator 2|欧洲卡车模拟2|
+228200|Company of Heroes|英雄连|
+230410|Warframe|星际战甲|
+232910|TrackMania² Stadium|赛道狂飚 2 体育场|TrackMania² Stadium
+236850|Europa Universalis IV|欧陆风云4|
+238960|Path of Exile|流放之路|
+239820|Game Dev Tycoon|游戏发展国|
+242760|The Forest|森林|
+244210|Assetto Corsa|神力科莎|
+246420|Kingdom Rush  - Tower Defense|王国保卫战|
+246620|Plague Inc: Evolved|瘟疫公司：进化版|Plague Inc: Evolved
+252490|Rust|腐蚀|
+252950|Rocket League®|火箭联盟|
+255710|Cities: Skylines|城市：天际线|
+256290|Child of Light|光之子|
+271590|Grand Theft Auto V Legacy|侠盗猎车手 5|Grand Theft Auto V
+272040|KAMI|神折纸|
+282070|This War of Mine|这是我的战争|
+284160|BeamNG.drive|BeamNG.drive|BeamNG.drive
+285330|RollerCoaster Tycoon® 2: Triple Thrill Pack|过山车大亨 2 三倍乐趣包|RollerCoaster Tycoon 2: Triple Thrill Pack
+286690|Metro 2033 Redux|地铁 2033 重制版|Metro 2033 Redux
+287310|Re-Volt|玩具遥控汽车|
+289070|Sid Meier’s Civilization® VI|黑暗之魂 2|DARK SOULS II
+292030|The Witcher 3: Wild Hunt|巫师3：狂猎|
+292410|Street Racing Syndicate|街头赛车|Street Racing Syndicate
+296770|Real Boxing™|真实拳击|
+304930|Unturned|未转变者|
+305260|Battle Islands|岛屿之战|
+307690|Sleeping Dogs: Definitive Edition|热血无赖：终极版|
+322170|Geometry Dash|几何冲刺|
+322330|Don't Starve Together|饥荒 联机版|
+323190|Frostpunk|冰汽时代|
+324680|Impossible Creatures Steam Edition|不可思议的生物|
+346010|Besiege|围攻|
+359550|Tom Clancy's Rainbow Six® Siege X|彩虹六号：围攻 X|Tom Clancy's Rainbow Six Siege X
+365670|Blender|Blender|Blender
+367670|Controller Companion|手柄伴侣|Controller Companion
+372000|Tree of Savior (English Ver.)|救世者之树|Tree of Savior
+375950|Viridi|肉肉|
+381210|Dead by Daylight|黎明杀机|
+387840|Alpha Runner|Alpha Runner|Alpha Runner
+391540|Undertale|地下传说|
+394360|Hearts of Iron IV|钢铁雄心4|
+400040|ShareX|ShareX|ShareX
+413150|Stardew Valley|星露谷物语|
+415200|Motorsport Manager|赛车经理|
+431240|Golf With Your Friends|和朋友打高尔夫|
+431730|Aseprite|Aseprite|Aseprite
+431960|Wallpaper Engine|Wallpaper Engine：壁纸引擎|
+438660|Jerry Rice & Nitus' Dog Football|Jerry Rice & Nitus' Dog Football|Jerry Rice & Nitus' Dog Football
+446830|The Lonesome Fog|The Lonesome Fog|The Lonesome Fog
+450390|The Lab|The Lab|The Lab
+489830|The Elder Scrolls V: Skyrim Special Edition|上古卷轴5：天际 特别版|
+508440|Totally Accurate Battle Simulator|全面战争模拟器|
+516750|My Summer Car|我的夏季汽车|
+517910|Sisyphus Reborn|Sisyphus Reborn|Sisyphus Reborn
+518790|theHunter: Call of the Wild™|猎人：荒野的召唤|theHunter: Call of the Wild
+545110|Driver Booster 4 for Steam|Driver Booster 4 for Steam|Driver Booster 4 for Steam
+554310|Rage Wars|Rage Wars|Rage Wars
+559210|Rakuen|Rakuen|Rakuen
+559680|Vampire: The Masquerade - Redemption|吸血鬼：化妆舞会 救赎|Vampire: The Masquerade - Redemption
+578080|PUBG: BATTLEGROUNDS|绝地求生|PUBG: BATTLEGROUNDS
+588430|Fallout Shelter|辐射 避难所|
+601510|Yu-Gi-Oh! Duel Links|游戏王 决斗链接|
+613100|House Flipper|房产达人|
+616720|Live2DViewerEX|Live2DViewerEX|Live2DViewerEX
+632470|Disco Elysium - The Final Cut|极乐迪斯科|
+635260|CarX Drift Racing Online|CarX Drift Racing Online|CarX Drift Racing Online
+645630|Car Mechanic Simulator 2018|汽车修理工模拟2018|
+646570|Slay the Spire|尖塔奇兵|
+647960|Rusted Warfare - RTS|铁锈战争|
+657200|Hand Simulator|手部模拟器|Hand Simulator
+665300|Stream Avatars|Stream Avatars|Stream Avatars
+674940|Stick Fight: The Game|火柴人战斗|
+683320|GRIS|GRIS|GRIS
+687850|Head Goal: Soccer Online|Head Goal: Soccer Online|Head Goal: Soccer Online
+698780|Doki Doki Literature Club!|心跳文学部|ドキドキ文芸部
+701380|El Tango de la Muerte|El Tango de la Muerte|El Tango de la Muerte
+703080|Planet Zoo|动物园之星|
+738060|Freddy Fazbear's Pizzeria Simulator|玩具熊的披萨店模拟|
+753360|VoiceActress|VoiceActress|VoiceActress
+755540|LIV|LIV|LIV
+778700|Amorous|Amorous|Amorous
+785480|Titanic: Adventure Out Of Time|泰坦尼克|
+786520|SAO Utils: Beta|SAO Utils: Beta|SAO Utils: Beta
+792050|Beneath The Surface|Beneath The Surface|Beneath The Surface
+798290|MXGP PRO|MXGP PRO|MXGP PRO
+819230|Gothicc Breaker|Gothicc Breaker|Gothicc Breaker
+843260|The Bard's Tale Trilogy|冰城传奇三部曲|
+843660|Rogue Agent|Rogue Agent|Rogue Agent
+870820|Wakaru ver. beta|Wakaru ver. beta|Wakaru ver. beta
+892970|Valheim|英灵神殿|
+945360|Among Us|在我们之中|
+960090|Bloons TD 6|气球塔防6|
+972660|Spiritfarer®: Farewell Edition|灵魂旅人|
+990080|Hogwarts Legacy|霍格沃茨之遗|
+1009850|OVR Advanced Settings|OVR Advanced Settings|OVR Advanced Settings
+1011510|Wizard And Minion Idle|Wizard And Minion Idle|Wizard And Minion Idle
+1028630|Cricket 19|板球19|
+1041320|Lords Mobile: Kingdom Wars|王国纪元|
+1055010|Energy Engine PC Live Wallpaper|Energy Engine PC Live Wallpaper|Energy Engine PC Live Wallpaper
+1085510|Garfield Kart - Furious Racing|加菲猫卡丁车：激情竞速|
+1085660|Destiny 2|命运2|
+1086940|Baldur's Gate 3|博德之门3|
+1091500|Cyberpunk 2077|赛博朋克2077|
+1100600|Football Manager 2020|足球经理2020|
+1118200|People Playground|People Playground|People Playground
+1118310|RetroArch|RetroArch|RetroArch
+1127400|Mindustry|Mindustry|Mindustry
+1147690|NGU IDLE|NGU IDLE|NGU IDLE
+1161490|MotoGP™20|MotoGP 20|MotoGP 20
+1172310|Mona Lisa: Beyond The Glass|蒙娜丽莎：玻璃之外|Mona Lisa: Beyond The Glass
+1172470|Apex Legends™|Apex英雄|
+1190000|Car Mechanic Simulator 2021|汽车修理工模拟2021|
+1204050|Pixel Studio - pixel art editor|Pixel Studio - pixel art editor|Pixel Studio - pixel art editor
+1210320|Potion Craft: Alchemist Simulator|药剂工艺：炼金术士模拟器|
+1213210|Command & Conquer™ Remastered Collection|命令与征服 高清重制合集|
+1222140|Detroit: Become Human|底特律：化身为人|
+1237970|Titanfall® 2|泰坦天降2|
+1244800|Terraformers|焕然异星|
+1245620|ELDEN RING|艾尔登法环|
+1263850|Football Manager 2021|足球经理2021|
+1283970|YoloMouse - Game Cursor Changer|YoloMouse|YoloMouse
+1286830|STAR WARS™: The Old Republic™|星球大战：旧共和国|
+1292940|Cube Escape Collection|逃脱方块|
+1326470|Sons Of The Forest|森林之子|
+1337970|CatTuber|CatTuber|CatTuber
+1366800|Crosshair X|Crosshair X|Crosshair X
+1374480|爱人 Lover|爱人 Lover|愛人 Lover
+1424330|Wobbledogs|摇摆狗狗|
+1454400|Cookie Clicker|饼干点点乐|
+1466860|Age of Empires IV: Anniversary Edition|浪人崛起|Rise of the Ronin
+1480140|RPG Sounds|RPG Sounds|RPG Sounds
+1486350|VRoid Studio v2.7.0|Fable Anniversary|Fable Anniversary
+1491670|Venba|Venba|Venba
+1545560|Shadow Gambit: The Cursed Crew|影子诡局：被诅咒的海盗|
+1546570|Sword and Fairy|仙剑奇侠传七|Sword and Fairy
+1569040|Football Manager 2022|足球经理2022|
+1599340|Lost Ark|命运方舟|
+1605010|Adorable Witch|可爱的魔女|Adorable Witch
+1623730|Palworld|幻兽帕鲁|パルワールド
+1625080|Have a Nice Dream|Combat Master|Combat Master
+1637370|Letters From a Rainy Day -Oceans and Lace-|雨日来信|Letters From a Rainy Day -Oceans and Lace-
+1650010|RIDE 5|极速骑行5|
+1669980|Volcano Princess|火山的女儿|
+1687950|Persona 5 Royal|女神异闻录5 皇家版|
+1708150|Juice Galaxy|Juice Galaxy|Juice Galaxy
+1775490|Slice & Dice|Slice & Dice|Slice & Dice
+1787090|MyDockFinder|MyDockFinder|MyDockFinder
+1794680|Vampire Survivors|吸血鬼幸存者|
+1844610|Reality Mixer - Mixed Reality for VR headsets|Reality Mixer|Reality Mixer - Mixed Reality for VR headsets
+1849570|Love Stories: When Pastel Meets Grotesque|Love Stories: When Pastel Meets Grotesque|Love Stories: When Pastel Meets Grotesque
+1893620|Circadian Dice|Circadian Dice|Circadian Dice
+1901340|Ero Manager|Ero Manager|Ero Manager
+1904540|Football Manager 2023|足球经理2023|
+1934680|Age of Mythology: Retold|神话时代：重述|Age of Mythology: Retold
+1938090|Call of Duty®|使命召唤|
+1943950|Escape the Backrooms|逃离后室|
+1966720|Lethal Company|致命公司|
+2073470|Kanjozoku Game レーサー Online Street Racing & Drift|Kanjozoku Game レーサー Online Street Racing & Drift|Kanjozoku Game レーサー Online Street Racing & Drift
+2078450|Warhammer 40,000: Speed Freeks|战锤 40000：极速小子|Warhammer 40,000: Speed Freeks
+2128270|Path of Achra|Path of Achra|Path of Achra
+2142790|Fields of Mistria|Forspoken|Forspoken
+2252570|Football Manager 2024|足球经理2024|
+2358720|Black Myth: Wukong|漫威蜘蛛侠 重制版|Marvel's Spider-Man Remastered
+2386460|Tree It|The Inheritance of Crimson Manor|The Inheritance of Crimson Manor
+2395210|Tony Hawk's™ Pro Skater™ 1 + 2|托尼·霍克职业滑板1+2|
+2427700|Backpack Battles|背包乱斗：福西法的宝藏|
+2536840|GINKA|GINKA|GINKA
+2593370|The Hungry Lamb: Traveling in the Late Ming Dynasty|饿殍：末代饥民|The Hungry Lamb: Traveling in the Late Ming Dynasty
+2660460|Aviassembly|Aviassembly|Aviassembly
+2670630|Supermarket Simulator|Marvin's Memories|Marvin's Memories
+2707900|NIGHT-RUNNERS™ PROLOGUE|NIGHT-RUNNERS 序章|NIGHT-RUNNERS PROLOGUE
+2784470|9 Kings|9 Kings|9 Kings
+2881650|Content Warning|内容警告|
+3029820|Ai Vpet|Ai Vpet|Ai Vpet
+3070070|TCG Card Shop Simulator|TCG 卡店模拟器|TCG Card Shop Simulator
+3164500|Schedule I|Schedule I|Schedule I
+3241660|R.E.P.O.|R.E.P.O.|R.E.P.O.
+3449850|Desktop Kitten Girl|Desktop Kitten Girl|Desktop Kitten Girl
