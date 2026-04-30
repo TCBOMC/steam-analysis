@@ -48,7 +48,7 @@ steam-analysis/
 
 ## 数据源
 
-- **Kaggle**: [fronkongames/steam-games-dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset)（2026 年 1 月更新，覆盖至 2025 年 4 月）
+- **Kaggle**: [fronkongames/steam-games-dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset)（2026 年 1 月更新，覆盖至 2025 年）
 - 筛选条件：评价数 ≥ 50，价格 ≤ $200
 
 ## 如何重新生成数据
