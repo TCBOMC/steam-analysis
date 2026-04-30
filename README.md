@@ -8,7 +8,7 @@ Steam 平台游戏数据的交互式可视化分析，覆盖 **2006–2025 年**
 
 也可直接打开仓库中的 `index_standalone.html` 离线查看。
 
-<img width="3765" height="6592" alt="Screenshot 2026-04-30 at 07-30-11 Steam时代编年史：玩家偏好的演变" src="https://github.com/user-attachments/assets/8ad7bbb3-51e6-47b6-9699-edc9e770dde5" />
+<img width="3765" height="6592" alt="Screenshot 2026-05-01 at 00-19-27 Steam时代编年史：玩家偏好的演变" src="https://github.com/user-attachments/assets/1018b426-9aa8-4f9a-aab7-d27ff004e94d" />
 
 ## 功能
 
