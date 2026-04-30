@@ -80,9 +80,15 @@ df = pd.read_json(
 # 重置索引，使 AppID 成为一列
 df = df.reset_index().rename(columns={"index": "appid"})
 
+# ---- 过滤前：记录每年原始上架游戏数 ----
+df["release_date_raw"] = pd.to_datetime(df["release_date"], format="%b %d, %Y", errors="coerce")
+df["year_raw"] = df["release_date_raw"].dt.year
+raw_year_counts = df.dropna(subset=["year_raw"]).groupby("year_raw").size().to_dict()
+df = df.drop(columns=["release_date_raw", "year_raw"])
+
 df["total_reviews"] = df["positive"] + df["negative"]
 df["positive_ratio"] = df["positive"] / df["total_reviews"]
-df = df[df["total_reviews"] >= 50].copy()
+df = df[df["total_reviews"] >= 50].copy()  # 过滤：仅保留评价数≥50的游戏
 df["release_date"] = pd.to_datetime(df["release_date"], format="%b %d, %Y", errors="coerce")
 df["year"] = df["release_date"].dt.year
 df = df.dropna(subset=["year"]).copy()
@@ -133,6 +139,7 @@ for year in all_years:
     # ---- 基本指标 ----
     key_metrics = {
         "n_games": n,
+        "n_total": int(raw_year_counts.get(year, 0)),  # 原始上架游戏数（未过滤）
         "avg_price": round(float(dy["price"].mean()), 2),
         "median_price": round(float(dy["price"].median()), 2),
         "avg_positive_ratio": round(float(dy["positive_ratio"].mean()) * 100, 1),
@@ -380,6 +387,7 @@ for year in all_years:
 trend_data = {
     "years": all_years,
     "n_games": [yearly_data.get(str(y), {}).get("metrics", {}).get("n_games", 0) for y in all_years],
+    "n_total": [raw_year_counts.get(y, 0) for y in all_years],  # 原始上架数（未过滤）
     "median_price": [yearly_data.get(str(y), {}).get("metrics", {}).get("median_price", 0) for y in all_years],
     "median_positive_ratio": [yearly_data.get(str(y), {}).get("metrics", {}).get("median_positive_ratio", 0) for y in all_years],
     "avg_playtime": [yearly_data.get(str(y), {}).get("metrics", {}).get("avg_playtime", 0) for y in all_years],
@@ -425,6 +433,7 @@ for y in all_years:
     yearly_summary.append({
         "year": y,
         "n_games": m["n_games"],
+        "n_total": m["n_total"],
         "median_price": m["median_price"],
         "median_positive_ratio": m["median_positive_ratio"],
         "avg_playtime": m["avg_playtime"],

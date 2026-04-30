@@ -4,6 +4,7 @@
       "year": 2006,
       "metrics": {
         "n_games": 64,
+        "n_total": 69,
         "avg_price": 2.93,
         "median_price": 1.99,
         "avg_positive_ratio": 84.6,
@@ -585,6 +586,7 @@
       "year": 2007,
       "metrics": {
         "n_games": 87,
+        "n_total": 90,
         "avg_price": 2.87,
         "median_price": 1.99,
         "avg_positive_ratio": 81.6,
@@ -1187,6 +1189,7 @@
       "year": 2008,
       "metrics": {
         "n_games": 137,
+        "n_total": 158,
         "avg_price": 3.58,
         "median_price": 2.49,
         "avg_positive_ratio": 79.4,
@@ -1822,6 +1825,7 @@
       "year": 2009,
       "metrics": {
         "n_games": 259,
+        "n_total": 321,
         "avg_price": 4.37,
         "median_price": 2.99,
         "avg_positive_ratio": 78.7,
@@ -2477,6 +2481,7 @@
       "year": 2010,
       "metrics": {
         "n_games": 213,
+        "n_total": 255,
         "avg_price": 3.31,
         "median_price": 2.49,
         "avg_positive_ratio": 76.2,
@@ -3124,6 +3129,7 @@
       "year": 2011,
       "metrics": {
         "n_games": 240,
+        "n_total": 260,
         "avg_price": 3.98,
         "median_price": 2.49,
         "avg_positive_ratio": 74.4,
@@ -3785,6 +3791,7 @@
       "year": 2012,
       "metrics": {
         "n_games": 309,
+        "n_total": 322,
         "avg_price": 4.0,
         "median_price": 2.99,
         "avg_positive_ratio": 76.2,
@@ -4458,6 +4465,7 @@
       "year": 2013,
       "metrics": {
         "n_games": 433,
+        "n_total": 467,
         "avg_price": 3.92,
         "median_price": 2.49,
         "avg_positive_ratio": 75.5,
@@ -5146,6 +5154,7 @@
       "year": 2014,
       "metrics": {
         "n_games": 1367,
+        "n_total": 1523,
         "avg_price": 4.01,
         "median_price": 2.49,
         "avg_positive_ratio": 71.3,
@@ -5854,6 +5863,7 @@
       "year": 2015,
       "metrics": {
         "n_games": 1902,
+        "n_total": 2515,
         "avg_price": 4.12,
         "median_price": 1.99,
         "avg_positive_ratio": 72.3,
@@ -6571,6 +6581,7 @@
       "year": 2016,
       "metrics": {
         "n_games": 2566,
+        "n_total": 4141,
         "avg_price": 3.9,
         "median_price": 1.99,
         "avg_positive_ratio": 74.0,
@@ -7325,6 +7336,7 @@
       "year": 2017,
       "metrics": {
         "n_games": 2686,
+        "n_total": 5920,
         "avg_price": 4.15,
         "median_price": 1.79,
         "avg_positive_ratio": 74.7,
@@ -8079,6 +8091,7 @@
       "year": 2018,
       "metrics": {
         "n_games": 2715,
+        "n_total": 7461,
         "avg_price": 4.15,
         "median_price": 1.99,
         "avg_positive_ratio": 75.8,
@@ -8832,6 +8845,7 @@
       "year": 2019,
       "metrics": {
         "n_games": 2426,
+        "n_total": 7242,
         "avg_price": 4.67,
         "median_price": 2.49,
         "avg_positive_ratio": 79.0,
@@ -9585,6 +9599,7 @@
       "year": 2020,
       "metrics": {
         "n_games": 2751,
+        "n_total": 8804,
         "avg_price": 4.7,
         "median_price": 2.69,
         "avg_positive_ratio": 80.5,
@@ -10320,6 +10335,7 @@
       "year": 2021,
       "metrics": {
         "n_games": 2571,
+        "n_total": 11067,
         "avg_price": 5.74,
         "median_price": 3.59,
         "avg_positive_ratio": 81.3,
@@ -11056,6 +11072,7 @@
       "year": 2022,
       "metrics": {
         "n_games": 2437,
+        "n_total": 12284,
         "avg_price": 6.83,
         "median_price": 4.79,
         "avg_positive_ratio": 81.4,
@@ -11783,6 +11800,7 @@
       "year": 2023,
       "metrics": {
         "n_games": 2696,
+        "n_total": 14596,
         "avg_price": 7.33,
         "median_price": 4.99,
         "avg_positive_ratio": 81.9,
@@ -12501,6 +12519,7 @@
       "year": 2024,
       "metrics": {
         "n_games": 3215,
+        "n_total": 20031,
         "avg_price": 8.06,
         "median_price": 5.99,
         "avg_positive_ratio": 83.3,
@@ -13210,6 +13229,7 @@
       "year": 2025,
       "metrics": {
         "n_games": 1517,
+        "n_total": 24973,
         "avg_price": 9.9,
         "median_price": 7.99,
         "avg_positive_ratio": 84.2,
@@ -13942,6 +13962,28 @@
       3215,
       1517
     ],
+    "n_total": [
+      69,
+      90,
+      158,
+      321,
+      255,
+      260,
+      322,
+      467,
+      1523,
+      2515,
+      4141,
+      5920,
+      7461,
+      7242,
+      8804,
+      11067,
+      12284,
+      14596,
+      20031,
+      24973
+    ],
     "median_price": [
       1.99,
       1.99,
@@ -14469,6 +14511,7 @@
     {
       "year": 2006,
       "n_games": 64,
+      "n_total": 69,
       "median_price": 1.99,
       "median_positive_ratio": 87.4,
       "avg_playtime": 734.1,
@@ -14484,6 +14527,7 @@
     {
       "year": 2007,
       "n_games": 87,
+      "n_total": 90,
       "median_price": 1.99,
       "median_positive_ratio": 86.0,
       "avg_playtime": 609.6,
@@ -14499,6 +14543,7 @@
     {
       "year": 2008,
       "n_games": 137,
+      "n_total": 158,
       "median_price": 2.49,
       "median_positive_ratio": 84.2,
       "avg_playtime": 500.5,
@@ -14514,6 +14559,7 @@
     {
       "year": 2009,
       "n_games": 259,
+      "n_total": 321,
       "median_price": 2.99,
       "median_positive_ratio": 82.6,
       "avg_playtime": 493.6,
@@ -14529,6 +14575,7 @@
     {
       "year": 2010,
       "n_games": 213,
+      "n_total": 255,
       "median_price": 2.49,
       "median_positive_ratio": 81.2,
       "avg_playtime": 595.8,
@@ -14544,6 +14591,7 @@
     {
       "year": 2011,
       "n_games": 240,
+      "n_total": 260,
       "median_price": 2.49,
       "median_positive_ratio": 78.1,
       "avg_playtime": 753.0,
@@ -14559,6 +14607,7 @@
     {
       "year": 2012,
       "n_games": 309,
+      "n_total": 322,
       "median_price": 2.99,
       "median_positive_ratio": 80.9,
       "avg_playtime": 757.4,
@@ -14574,6 +14623,7 @@
     {
       "year": 2013,
       "n_games": 433,
+      "n_total": 467,
       "median_price": 2.49,
       "median_positive_ratio": 79.4,
       "avg_playtime": 806.7,
@@ -14589,6 +14639,7 @@
     {
       "year": 2014,
       "n_games": 1367,
+      "n_total": 1523,
       "median_price": 2.49,
       "median_positive_ratio": 75.2,
       "avg_playtime": 643.4,
@@ -14604,6 +14655,7 @@
     {
       "year": 2015,
       "n_games": 1902,
+      "n_total": 2515,
       "median_price": 1.99,
       "median_positive_ratio": 75.6,
       "avg_playtime": 486.9,
@@ -14619,6 +14671,7 @@
     {
       "year": 2016,
       "n_games": 2566,
+      "n_total": 4141,
       "median_price": 1.99,
       "median_positive_ratio": 76.9,
       "avg_playtime": 594.5,
@@ -14634,6 +14687,7 @@
     {
       "year": 2017,
       "n_games": 2686,
+      "n_total": 5920,
       "median_price": 1.79,
       "median_positive_ratio": 77.8,
       "avg_playtime": 1231.9,
@@ -14649,6 +14703,7 @@
     {
       "year": 2018,
       "n_games": 2715,
+      "n_total": 7461,
       "median_price": 1.99,
       "median_positive_ratio": 78.9,
       "avg_playtime": 541.6,
@@ -14664,6 +14719,7 @@
     {
       "year": 2019,
       "n_games": 2426,
+      "n_total": 7242,
       "median_price": 2.49,
       "median_positive_ratio": 82.6,
       "avg_playtime": 702.5,
@@ -14679,6 +14735,7 @@
     {
       "year": 2020,
       "n_games": 2751,
+      "n_total": 8804,
       "median_price": 2.69,
       "median_positive_ratio": 83.8,
       "avg_playtime": 555.8,
@@ -14694,6 +14751,7 @@
     {
       "year": 2021,
       "n_games": 2571,
+      "n_total": 11067,
       "median_price": 3.59,
       "median_positive_ratio": 84.3,
       "avg_playtime": 814.2,
@@ -14709,6 +14767,7 @@
     {
       "year": 2022,
       "n_games": 2437,
+      "n_total": 12284,
       "median_price": 4.79,
       "median_positive_ratio": 84.4,
       "avg_playtime": 636.4,
@@ -14724,6 +14783,7 @@
     {
       "year": 2023,
       "n_games": 2696,
+      "n_total": 14596,
       "median_price": 4.99,
       "median_positive_ratio": 84.8,
       "avg_playtime": 524.9,
@@ -14739,6 +14799,7 @@
     {
       "year": 2024,
       "n_games": 3215,
+      "n_total": 20031,
       "median_price": 5.99,
       "median_positive_ratio": 86.4,
       "avg_playtime": 480.2,
@@ -14754,6 +14815,7 @@
     {
       "year": 2025,
       "n_games": 1517,
+      "n_total": 24973,
       "median_price": 7.99,
       "median_positive_ratio": 87.3,
       "avg_playtime": 558.1,

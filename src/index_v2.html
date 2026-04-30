@@ -312,7 +312,7 @@
 </div>
 
 <div class="footer">
-    数据来源：Steam Store Games Dataset | 11,794款有效游戏 (评价≥50) | 分析工具：Python + ECharts
+    数据来源：Steam Store Games Dataset (fronkongames/kagglehub v31, 122,611款游戏) | 统计指标（价格、好评率、类型分布、推荐等）基于评价数≥50条的有效游戏计算，游戏数量同时展示全部上架数 | 分析工具：Python + ECharts
 </div>
 
 <script>
@@ -479,11 +479,12 @@ function updateYearView(yd) {
         2016:'独立游戏爆发',2017:'市场成熟',2018:'精品化时代',2019:'新十年起点',2020:'疫情居家潮',
         2021:'后疫情分化',2022:'价格攀升期',2023:'市场回暖',2024:'全面繁荣',2025:'高价精品化'};
     document.getElementById('yearSubtitle').textContent = (eraNames[yd.year] || '') + ' · ' + p.top_tags.slice(0,3).join(' / ');
-    document.getElementById('yearMeta').textContent = `该年上架 ${m.n_games.toLocaleString()} 款游戏 · ${m.total_reviews.toLocaleString()} 条评价`;
+    document.getElementById('yearMeta').textContent = `该年上架 ${m.n_total.toLocaleString()} 款游戏（有效评价 ${m.n_games.toLocaleString()} 款） · ${m.total_reviews.toLocaleString()} 条评价`;
 
     // 指标
     document.getElementById('metricsRow').innerHTML = `
-        <div class="metric"><div class="val">${m.n_games.toLocaleString()}</div><div class="lbl">上架游戏</div></div>
+        <div class="metric"><div class="val">${m.n_total.toLocaleString()}</div><div class="lbl">上架游戏</div></div>
+        <div class="metric"><div class="val">${m.n_games.toLocaleString()}</div><div class="lbl">有效评价游戏</div></div>
         <div class="metric"><div class="val">$${m.median_price}</div><div class="lbl">价格中位数</div></div>
         <div class="metric"><div class="val">${m.median_positive_ratio}%</div><div class="lbl">好评率中位数</div></div>
         <div class="metric"><div class="val">${m.median_playtime}h</div><div class="lbl">游玩时长中位数</div></div>
@@ -594,17 +595,27 @@ function initTrends() {
         label: { show: true, position: 'top', color: '#f0b232', fontWeight: 'bold', fontSize: 12 }
     };
 
-    // 游戏数量
+    // 游戏数量（双线：全部上架 vs 有效评价）
     const c1 = mc('chartTrendCount');
     c1.setOption({
-        tooltip: { trigger: 'axis' },
-        grid: { left: 50, right: 20 },
+        tooltip: { trigger: 'axis', formatter: p => {
+            let s = p[0].axisValue + '年';
+            p.forEach(item => { s += `<br/>${item.marker} ${item.seriesName}: <b>${item.data.value.toLocaleString()}</b>`; });
+            return s;
+        } },
+        legend: { data: ['全部上架', '有效评价(≥50条)'], textStyle: { color: '#8b949e', fontSize: 11 } },
+        grid: { left: 50, right: 20, bottom: 36 },
         xAxis: { type: 'category', data: t.years },
         yAxis: { type: 'value', name: '游戏数量' },
-        series: [{ type: 'line', data: t.n_games.map((v,i) => ({
-            value: v, itemStyle: t.years[i]===currentYear ? highlightStyle.itemStyle : undefined,
-            label: t.years[i]===currentYear ? highlightStyle.label : undefined,
-        })), smooth: true, lineStyle: { color: '#66c0f4' }, areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(102,192,244,0.25)'},{offset:1,color:'rgba(102,192,244,0)'}]) } }],
+        series: [
+            { name: '全部上架', type: 'line', data: t.n_total.map((v,i) => ({
+                value: v, itemStyle: t.years[i]===currentYear ? highlightStyle.itemStyle : undefined,
+                label: t.years[i]===currentYear ? highlightStyle.label : undefined,
+            })), smooth: true, lineStyle: { color: '#66c0f4', width: 2 }, areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(102,192,244,0.2)'},{offset:1,color:'rgba(102,192,244,0)'}]) } },
+            { name: '有效评价(≥50条)', type: 'line', data: t.n_games.map((v,i) => ({
+                value: v, itemStyle: t.years[i]===currentYear ? highlightStyle.itemStyle : undefined,
+            })), smooth: true, lineStyle: { color: '#f0b232', width: 2 } },
+        ],
         markPoint: { data: [{ type: 'max', name: '峰值' }] },
     });
 
@@ -660,7 +671,7 @@ function updateSummaryTable() {
     const s = DATA.yearly_summary;
     let html = '<table class="data-table"><thead><tr>';
     const cols = [
-        ['year','年份'],['n_games','游戏数'],['median_price','价格中位数'],
+        ['year','年份'],['n_total','上架数'],['n_games','有效评价数'],['median_price','价格中位数'],
         ['median_positive_ratio','好评率中位数'],['avg_playtime','平均时长'],
         ['total_reviews','总评价数'],['top_genre','最火类型'],
         ['preferred_price','偏好价位'],['trend','趋势'],['top1_game','TOP1游戏'],['top1_score','TOP1评分']
